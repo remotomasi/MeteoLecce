@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             Double tt = Double.parseDouble(temp);
             Double wp = Double.parseDouble(wPow);
             wp = wp * 3.6;
-            tt = tt - 273;
+            tt = tt - 273.15;
 
             txtTemp.setText(String.format("%.2f", tt) + " °C");
             txtPress.setText(press + " hPa");
