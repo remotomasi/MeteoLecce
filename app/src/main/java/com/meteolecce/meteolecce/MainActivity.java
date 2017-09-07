@@ -20,8 +20,8 @@ import org.apache.http.client.ClientProtocolException;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView txtTemp = null, txtPress = null;
-    String temp = null, press = null;
+    TextView txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null;
+    String temp = null, press = null, hum = null, wPow = null, wDir = null;
     final String site = "http://api.openweathermap.org/data/2.5/weather?q=Lecce,it&appid=35222ccfcb5285d12e8a0e3222d59d9c";
 
     @Override
@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
             txtTemp = (TextView) findViewById(R.id.textView7);
             txtPress = (TextView) findViewById(R.id.textView2);
+            txtHum = (TextView) findViewById(R.id.textView4);
+            txtWPow = (TextView) findViewById(R.id.textView8);
+            txtWDir = (TextView) findViewById(R.id.textView10);
 
             String str = "";
             HttpResponse response;
@@ -59,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject json = new JSONObject(str);
                 temp = json.getJSONObject("main").getString("temp");
                 press = json.getJSONObject("main").getString("pressure");
+                hum = json.getJSONObject("main").getString("humidity");
+                wPow = json.getJSONObject("wind").getString("speed");
+                wDir = json.getJSONObject("wind").getString("deg");
                 //txt.setText(module);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -69,8 +75,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
 
-            txtTemp.setText(temp);
-            txtPress.setText(press);
+            Double tt = Double.parseDouble(temp);
+            Double wp = Double.parseDouble(wPow);
+            wp = wp * 3.6;
+            tt = tt - 273;
+
+            txtTemp.setText(String.format("%.2f", tt) + " °C");
+            txtPress.setText(press + " hPa");
+            txtHum.setText(hum + " %");
+            txtWPow.setText(String.format("%.2f", wp) + " Km/h");
+            txtWDir.setText(wDir);
             super.onPostExecute(result);
         }
     }

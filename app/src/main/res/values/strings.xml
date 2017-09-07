@@ -6,4 +6,11 @@
     <string name="temperature">0</string>
     <string name="pressureName">Pressione</string>
     <string name="pressure">0</string>
+    <string name="windName">Vento</string>
+    <string name="windDir">Direzione</string>
+    <string name="wPower">0</string>
+    <string name="wDir">0</string>
+    <string name="humidity">0</string>
+    <string name="humName">Umidità</string>
+    <string name="titleMainPage">SITUAZIONE ATTUALE</string>
 </resources>
