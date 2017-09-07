@@ -20,8 +20,8 @@ import org.apache.http.client.ClientProtocolException;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView txt = null;
-    String module = null;
+    TextView txtTemp = null, txtPress = null;
+    String temp = null, press = null;
     final String site = "http://api.openweathermap.org/data/2.5/weather?q=Lecce,it&appid=35222ccfcb5285d12e8a0e3222d59d9c";
 
     @Override
@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            txt = (TextView) findViewById(R.id.textView7);
+            txtTemp = (TextView) findViewById(R.id.textView7);
+            txtPress = (TextView) findViewById(R.id.textView2);
 
             String str = "";
             HttpResponse response;
@@ -56,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
             }
             try {
                 JSONObject json = new JSONObject(str);
-                module = json.getJSONObject("main").getString("temp");
+                temp = json.getJSONObject("main").getString("temp");
+                press = json.getJSONObject("main").getString("pressure");
                 //txt.setText(module);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -67,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
 
-            txt.setText(module);
+            txtTemp.setText(temp);
+            txtPress.setText(press);
             super.onPostExecute(result);
         }
     }
@@ -80,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             Toast.makeText(MainActivity.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
-
-
 
         }
 

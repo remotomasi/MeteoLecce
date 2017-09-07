@@ -4,4 +4,6 @@
     <string name="data_viewer">Data</string>
     <string name="tempName">Temperatura</string>
     <string name="temperature">0</string>
+    <string name="pressureName">Pressione</string>
+    <string name="pressure">0</string>
 </resources>
