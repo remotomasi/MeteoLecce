@@ -1,7 +1,10 @@
 package com.meteolecce.meteolecce;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
+
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.view.View;
 import android.widget.Toast;
 
 import android.support.v7.app.AppCompatActivity;
@@ -89,7 +92,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    /** Called when the user taps the Update button */
+    public void sendMessage(View view) {
+        Intent intent=new Intent(MainActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     private abstract class GetContacts extends AsyncTask<Void, Void, Void> {
         //public void readWeatherLecce() {

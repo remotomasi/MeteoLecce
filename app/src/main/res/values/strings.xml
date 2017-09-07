@@ -13,4 +13,5 @@
     <string name="humidity">0</string>
     <string name="humName">Umidità</string>
     <string name="titleMainPage">SITUAZIONE ATTUALE</string>
+    <string name="update">Aggiorna</string>
 </resources>
