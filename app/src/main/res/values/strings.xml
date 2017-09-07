@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MeteoLecce</string>
+    <string name="button_update">Update</string>
+    <string name="data_viewer">Data</string>
+    <string name="tempName">Temperatura</string>
+    <string name="temperature">0</string>
+</resources>
