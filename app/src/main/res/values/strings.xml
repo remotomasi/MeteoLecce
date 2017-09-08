@@ -14,4 +14,6 @@
     <string name="humName">Umidità</string>
     <string name="titleMainPage">SITUAZIONE ATTUALE</string>
     <string name="update">Aggiorna</string>
+    <string name="cloudsName">Cielo</string>
+    <string name="clouds">0</string>
 </resources>

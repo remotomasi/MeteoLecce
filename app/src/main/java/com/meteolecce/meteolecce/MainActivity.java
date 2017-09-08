@@ -23,8 +23,8 @@ import org.apache.http.client.ClientProtocolException;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null;
-    String temp = null, press = null, hum = null, wPow = null, wDir = null;
+    TextView txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null, txtClouds = null;
+    String temp = null, press = null, hum = null, wPow = null, wDir = null, clouds = null;
     final String site = "http://api.openweathermap.org/data/2.5/weather?q=Lecce,it&appid=35222ccfcb5285d12e8a0e3222d59d9c";
 
     @Override
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             txtHum = (TextView) findViewById(R.id.textView4);
             txtWPow = (TextView) findViewById(R.id.textView8);
             txtWDir = (TextView) findViewById(R.id.textView10);
+            txtClouds = (TextView) findViewById(R.id.textView13);
 
             String str = "";
             HttpResponse response;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 hum = json.getJSONObject("main").getString("humidity");
                 wPow = json.getJSONObject("wind").getString("speed");
                 wDir = json.getJSONObject("wind").getString("deg");
-                //txt.setText(module);
+                clouds = json.getJSONObject("clouds").getString("all");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
             txtHum.setText(hum + " %");
             txtWPow.setText(String.format("%.2f", wp) + " Km/h");
             txtWDir.setText(windDirection(Integer.parseInt(wDir)));
+            txtClouds.setText(clouds + " %");
             super.onPostExecute(result);
         }
     }
