@@ -87,16 +87,41 @@ public class MainActivity extends AppCompatActivity {
             txtPress.setText(press + " hPa");
             txtHum.setText(hum + " %");
             txtWPow.setText(String.format("%.2f", wp) + " Km/h");
-            txtWDir.setText(wDir);
+            txtWDir.setText(windDirection(Integer.parseInt(wDir)));
             super.onPostExecute(result);
         }
     }
 
     /** Called when the user taps the Update button */
-    public void sendMessage(View view) {
+    public void update(View view) {
         Intent intent=new Intent(MainActivity.this,MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    /** Convert degree in a human comprehensible thing */
+    public String windDirection(int deg) {
+        String dir = null;
+
+        if (deg > 335 || deg <= 25) {
+            dir = "Nord";
+        } else if (deg > 25 && deg <= 65) {
+            dir = "Nord-Est";
+        } else if (deg > 65 && deg <= 155) {
+            dir = "Est";
+        } else if (deg > 115 && deg <= 155) {
+            dir = "Sud-Est";
+        } else if (deg > 155 && deg <= 205) {
+            dir = "Sud";
+        } else if (deg > 205 && deg <= 245) {
+            dir = "Sud-Ovest";
+        } else if (deg > 245 && deg <= 295) {
+            dir = "Ovest";
+        } else if (deg > 295 && deg <= 335) {
+            dir = "Nord-Ovest";
+        }
+
+        return dir;
     }
 
     private abstract class GetContacts extends AsyncTask<Void, Void, Void> {
