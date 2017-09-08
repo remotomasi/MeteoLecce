@@ -16,4 +16,6 @@
     <string name="update">Aggiorna</string>
     <string name="cloudsName">Cielo</string>
     <string name="clouds">0</string>
+    <string name="phenomenon">\"\"</string>
+    <string name="titleWeather3Forecast">PROSSIMI 3 GIORNI</string>
 </resources>

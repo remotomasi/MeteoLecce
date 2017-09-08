@@ -23,8 +23,9 @@ import org.apache.http.client.ClientProtocolException;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null, txtClouds = null;
-    String temp = null, press = null, hum = null, wPow = null, wDir = null, clouds = null;
+    TextView txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null, txtClouds = null,
+        txtPhenomen = null;
+    String temp = null, press = null, hum = null, wPow = null, wDir = null, clouds = null, phenomenon = null;
     final String site = "http://api.openweathermap.org/data/2.5/weather?q=Lecce,it&appid=35222ccfcb5285d12e8a0e3222d59d9c";
 
     @Override
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             txtWPow = (TextView) findViewById(R.id.textView8);
             txtWDir = (TextView) findViewById(R.id.textView10);
             txtClouds = (TextView) findViewById(R.id.textView13);
+            txtPhenomen = (TextView) findViewById(R.id.textView14);
 
             String str = "";
             HttpResponse response;
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 wPow = json.getJSONObject("wind").getString("speed");
                 wDir = json.getJSONObject("wind").getString("deg");
                 clouds = json.getJSONObject("clouds").getString("all");
+                phenomenon = "" + json.getJSONArray("weather").getJSONObject(0).getString("description");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             txtWPow.setText(String.format("%.2f", wp) + " Km/h");
             txtWDir.setText(windDirection(Integer.parseInt(wDir)));
             txtClouds.setText(clouds + " %");
+            txtPhenomen.setText(skyConversion(phenomenon));
             super.onPostExecute(result);
         }
     }
@@ -124,6 +128,33 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return dir;
+    }
+
+    /** Convert degree in a human comprehensible thing */
+    public String skyConversion(String value) {
+        String sky = null;
+
+        if (value.equals("few clouds")) {
+            sky = "Poche nubi";
+        } else if (value.equals("thunderstorm")) {
+            sky = "Temporale";
+        } else if (value.equals("clear sky")) {
+            sky = "Sereno";
+        } else if (value.equals("scattered clouds")) {
+            sky = "Nubi sparse";
+        } else if (value.equals("broken clouds")) {
+            sky = "Nuvoloso";
+        } else if (value.equals("shower rain")) {
+            sky = "Pioggia intensa";
+        } else if (value.equals("rain")) {
+            sky = "Pioggia";
+        } else if (value.equals("snow")) {
+            sky = "Neve";
+        } else if (value.equals("mist")) {
+            sky = "Nebbia";
+        }
+
+        return sky;
     }
 
     private abstract class GetContacts extends AsyncTask<Void, Void, Void> {
