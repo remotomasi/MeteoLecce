@@ -33,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new readWeatherLecce().execute();
+        // Get the Intent that started this activity
+        Intent intent = getIntent();
 
+        new readWeatherLecce().execute();
     }
 
     private class readWeatherLecce extends AsyncTask<Void, Void, Void> {
@@ -105,6 +107,12 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    /** Called when the user taps the Send button */
+    public void forecast3weather(View view) {
+        Intent intent=new Intent(MainActivity.this,weather3forecast.class);
+        startActivity(intent);
+    }
+
     /** Convert degree in a human comprehensible thing */
     public String windDirection(int deg) {
         String dir = null;
@@ -165,8 +173,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
 
         }
-
-        //}
-
     }
 }

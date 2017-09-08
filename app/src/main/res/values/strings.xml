@@ -18,4 +18,5 @@
     <string name="clouds">0</string>
     <string name="phenomenon">\"\"</string>
     <string name="titleWeather3Forecast">PROSSIMI 3 GIORNI</string>
+    <string name="forecast3">Previsioni</string>
 </resources>
