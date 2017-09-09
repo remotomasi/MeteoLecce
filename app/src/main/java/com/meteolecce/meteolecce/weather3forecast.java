@@ -19,6 +19,8 @@ import java.io.IOException;
 
 public class weather3forecast extends AppCompatActivity {
 
+    final String site3wf = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
