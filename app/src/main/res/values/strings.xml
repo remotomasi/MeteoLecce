@@ -19,4 +19,7 @@
     <string name="phenomenon">\"\"</string>
     <string name="titleWeather3Forecast">PROSSIMI 3 GIORNI</string>
     <string name="forecast3">Previsioni</string>
+    <string name="temperature3d_1">0</string>
+    <string name="humidity3d_1">0</string>
+    <string name="date">\"\"</string>
 </resources>

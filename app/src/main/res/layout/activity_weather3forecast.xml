@@ -47,4 +47,22 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="62dp" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="@string/temperature3d_1"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView16"
+        app:layout_constraintLeft_toRightOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="@string/humidity3d_1"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView17"
+        app:layout_constraintLeft_toRightOf="@+id/textView17" />
 </android.support.constraint.ConstraintLayout>

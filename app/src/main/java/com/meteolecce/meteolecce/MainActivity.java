@@ -11,6 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import org.json.JSONObject;
 import org.apache.http.HttpResponse;
 //import org.apache.http.client.HttpClient;
@@ -23,10 +28,14 @@ import org.apache.http.client.ClientProtocolException;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null, txtClouds = null,
+    TextView txtDate = null, txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null, txtClouds = null,
         txtPhenomen = null;
     String temp = null, press = null, hum = null, wPow = null, wDir = null, clouds = null, phenomenon = null;
     final String site = "http://api.openweathermap.org/data/2.5/weather?q=Lecce,it&appid=35222ccfcb5285d12e8a0e3222d59d9c";
+    Date date = Calendar.getInstance().getTime();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // hh:mm:ss
+    String today = sdf.format(date);
+    //return sdf.format(date);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
 
+            txtDate = (TextView) findViewById(R.id.textView20);
             txtTemp = (TextView) findViewById(R.id.textView7);
             txtPress = (TextView) findViewById(R.id.textView2);
             txtHum = (TextView) findViewById(R.id.textView4);
@@ -88,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             Double wp = Double.parseDouble(wPow);
             wp = wp * 3.6;
             tt = tt - 273.15;
+
+            txtDate.setText(today);
 
             txtTemp.setText(String.format("%.2f", tt) + " °C");
             txtPress.setText(press + " hPa");

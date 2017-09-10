@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -19,7 +20,9 @@ import java.io.IOException;
 
 public class weather3forecast extends AppCompatActivity {
 
-    final String site3wf = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
+    TextView txtTemp3d_1 = null, txtHum3d_1 = null;
+    String temp3d_1 = null, hum3d_1 = null;
+    final String site3d = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +36,39 @@ public class weather3forecast extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
+
+            txtTemp3d_1 = (TextView) findViewById(R.id.textView18);
+            txtHum3d_1 = (TextView) findViewById(R.id.textView19);
+
+            String str3d = "";
+            HttpResponse response;
+            DefaultHttpClient myClient3d = new DefaultHttpClient();
+            //HttpClient myClient = HttpClientBuilder.create().build();
+            HttpPost myConnection = new HttpPost(site3d);
+
+            try {
+                response = myClient3d.execute(myConnection);
+                str3d = EntityUtils.toString(response.getEntity(), "UTF-8");
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                JSONObject json = new JSONObject(str3d);
+                temp3d_1 = "" + json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(0).getString("temperature");
+                hum3d_1 = "" + json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(0).getString("humidity");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
 
+            txtTemp3d_1.setText(temp3d_1 + " °C");
+            txtHum3d_1.setText(hum3d_1 + " %");
             super.onPostExecute(result);
         }
     }
@@ -51,7 +81,7 @@ public class weather3forecast extends AppCompatActivity {
 
 
     private abstract class GetContacts extends AsyncTask<Void, Void, Void> {
-        //public void readWeatherLecce() {
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
