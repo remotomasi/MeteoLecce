@@ -168,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
             sky = "Pioggia intensa";
         } else if (value.equals("rain")) {
             sky = "Pioggia";
+        } else if (value.equals("light rain")) {
+            sky = "Pioggia leggera";
         } else if (value.equals("snow")) {
             sky = "Neve";
         } else if (value.equals("mist")) {
