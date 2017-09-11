@@ -17,12 +17,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class weather3forecast extends AppCompatActivity {
 
-    TextView txtTemp3d_1 = null, txtHum3d_1 = null;
+    TextView txtTemp3d_1 = null, txtHum3d_1 = null, temp = null;
+    int len = 0;
     String temp3d_1 = null, hum3d_1 = null;
     final String site3d = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
+    Date date = Calendar.getInstance().getTime();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // hh:mm:ss
+    String today = sdf.format(date);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,9 @@ public class weather3forecast extends AppCompatActivity {
                 JSONObject json = new JSONObject(str3d);
                 temp3d_1 = "" + json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(0).getString("temperature");
                 hum3d_1 = "" + json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(0).getString("humidity");
+
+                len = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").length();
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
