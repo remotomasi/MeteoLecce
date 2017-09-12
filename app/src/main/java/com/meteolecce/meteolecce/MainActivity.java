@@ -13,15 +13,11 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import org.json.JSONObject;
 import org.apache.http.HttpResponse;
-//import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-//import org.apache.http.client.methods.HttpGet;
-//import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.client.ClientProtocolException;
 
