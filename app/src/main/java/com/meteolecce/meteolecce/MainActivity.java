@@ -4,6 +4,7 @@ import org.json.JSONException;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -98,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
             txtTemp.setText(String.format("%.2f", tt) + " °C");
             txtHum.setText(hum + " %");
             txtWPow.setText(String.format("%.2f", wp) + " Km/h");
-            txtWDir.setText(windDirection(Integer.parseInt(wDir)));
+            Log.e("Error wDir:", "" + Double.parseDouble(wDir));
+            if (wDir != "") txtWDir.setText(windDirection((int)Double.parseDouble(wDir)));
             txtClouds.setText(clouds + " %");
             txtPhenomen.setText(skyConversion(phenomenon));
             super.onPostExecute(result);
