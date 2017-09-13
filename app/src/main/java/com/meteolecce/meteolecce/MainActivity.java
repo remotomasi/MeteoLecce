@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
             txtDate = (TextView) findViewById(R.id.textView20);
             txtTemp = (TextView) findViewById(R.id.textView7);
-            txtPress = (TextView) findViewById(R.id.textView2);
             txtHum = (TextView) findViewById(R.id.textView4);
             txtWPow = (TextView) findViewById(R.id.textView8);
             txtWDir = (TextView) findViewById(R.id.textView10);
@@ -75,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject json = new JSONObject(str);
                 temp = json.getJSONObject("main").getString("temp");
-                press = json.getJSONObject("main").getString("pressure");
                 hum = json.getJSONObject("main").getString("humidity");
                 wPow = json.getJSONObject("wind").getString("speed");
                 wDir = json.getJSONObject("wind").getString("deg");
@@ -98,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
             txtDate.setText(today);
 
             txtTemp.setText(String.format("%.2f", tt) + " °C");
-            txtPress.setText(press + " hPa");
             txtHum.setText(hum + " %");
             txtWPow.setText(String.format("%.2f", wp) + " Km/h");
             txtWDir.setText(windDirection(Integer.parseInt(wDir)));
