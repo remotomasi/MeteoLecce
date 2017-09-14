@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
     Date date = Calendar.getInstance().getTime();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // hh:mm:ss
     String today = sdf.format(date);
-    //return sdf.format(date);
+    ImageView imgIco = null, imgIco2 = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             txtWDir = (TextView) findViewById(R.id.textView10);
             txtClouds = (TextView) findViewById(R.id.textView13);
             txtPhenomen = (TextView) findViewById(R.id.textView14);
+            imgIco = (ImageView) findViewById(R.id.imageViewIcon);
 
             String str = "";
             HttpResponse response;
@@ -103,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
             if (wDir != "") txtWDir.setText(windDirection((int)Double.parseDouble(wDir)));
             txtClouds.setText(clouds + " %");
             txtPhenomen.setText(skyConversion(phenomenon));
+            skyIcon(skyConversion(phenomenon), imgIco);
+
             super.onPostExecute(result);
         }
     }
@@ -172,6 +177,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return sky;
+    }
+
+    /** Convert degree in a human comprehensible thing */
+    public void skyIcon(String value, ImageView imgV) {
+
+        if (value.equals("sereno")) {
+            imgV.setImageResource(R.drawable.sun);
+        } else if (value.equals("Poche nubi")) {
+            imgV.setImageResource(R.drawable.sun_and_cloud);
+        } else if (value.equals("Nubi sparse")) {
+            imgV.setImageResource(R.drawable.bit_cloudy);
+        } else if (value.equals("Nuvoloso")) {
+            imgV.setImageResource(R.drawable.cloudy);
+        } else if (value.equals("Pioggia")) {
+            imgV.setImageResource(R.drawable.rain);
+        } else if (value.equals("Pioggia leggera")) {
+            imgV.setImageResource(R.drawable.very_light_rain);
+        } else if (value.equals("Pioggia intensa")) {
+            imgV.setImageResource(R.drawable.heavy_rain);
+        } else if (value.equals("Temporale")) {
+            imgV.setImageResource(R.drawable.thunderstorm);
+        } else if (value.equals("Neve")) {
+            imgV.setImageResource(R.drawable.snow);
+        } else if (value.equals("Nebbia")) {
+            imgV.setImageResource(R.drawable.fog3);
+        }
     }
 
     private abstract class GetContacts extends AsyncTask<Void, Void, Void> {
