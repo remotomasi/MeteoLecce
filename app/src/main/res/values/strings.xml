@@ -29,4 +29,5 @@
     <string name="temperature3d_3"></string>
     <string name="humidity3d_2"></string>
     <string name="humidity3d_3"></string>
+    <string name="tempNameMinMax">Temp. min/max</string>
 </resources>

@@ -2,6 +2,7 @@ package com.meteolecce.meteolecce;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,12 +27,15 @@ public class weather3forecast extends AppCompatActivity {
 
     TextView txtTemp3d_1 = null, txtHum3d_1 = null, day1 = null, day2 = null, day3 = null,
             txtTemp3d_2 = null, txtHum3d_2 = null, txtTemp3d_3 = null, txtHum3d_3 = null;
-    int len = 0, temp1 = 0, temp2 = 0, temp3 = 0;
+    int len = 0, temp1 = 0, temp2 = 0, temp3 = 0, tmpTemp = 0,
+        tempd1max = -99, tempd1min = 99, tempd2max = -99, tempd2min = 99, tempd3max = -99, tempd3min = 99;
     int hum1 = 0, hum2 = 0, hum3 = 0;
-    String temp3d_1 = null, hum3d_1 = null, dateJson = null,
+    String temp3d_1 = null, hum3d_1 = null, dateJson = null, hourJson = null,
             temp3d_2 = null, hum3d_2 = null,
             temp3d_3 = null, hum3d_3 = null,
-            phenomenon = null, phenomenon2 = null, phenomenon3 = null;
+            phenomenon11 = null, phenomenon12 = null, phenomenon13 = null, phenomenon14 = null,
+            phenomenon21 = null, phenomenon22 = null, phenomenon23 = null, phenomenon24 = null,
+            phenomenon31 = null, phenomenon32 = null, phenomenon33 = null, phenomenon34 = null;
     final String site3d = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // hh:mm:ss
     ImageView imgIco = null, imgIco2 = null, imgIco3 = null;
@@ -95,28 +99,48 @@ public class weather3forecast extends AppCompatActivity {
                 hum1 = hum2 = hum3 = 0;
                 for (int i = 0; i < 150; i++) {
                     dateJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(0,10);
+                    hourJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(11,13);
                     if (today1.equals(dateJson)) {
-                        temp1 = temp1 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
+                        tmpTemp = Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
+                        if (tmpTemp > tempd1max) tempd1max = tmpTemp;
+                        if ((tmpTemp < tempd1min) && (tmpTemp > (tempd1max-20))) tempd1min = tmpTemp;
+                        //temp1 = temp1 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
                         hum1 = hum1 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
-                        phenomenon = "" + json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("00")) phenomenon11 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("06")) phenomenon12 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("15")) phenomenon13 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("18")) phenomenon14 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                     }
                     if (today2.equals(dateJson)) {
-                        temp2 = temp2 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
+                        tmpTemp = Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
+                        if (tmpTemp > tempd2max) tempd2max = tmpTemp;
+                        if ((tmpTemp < tempd2min) && (tmpTemp > (tempd2max-20))) tempd2min = tmpTemp;
+                        //temp2 = temp2 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
                         hum2 = hum2 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
-                        phenomenon2 = "" + json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("00")) phenomenon21 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("06")) phenomenon22 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("12")) phenomenon23 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("18")) phenomenon24 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                     }
                     if (today3.equals(dateJson)) {
-                        temp3 = temp3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
+                        tmpTemp = Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
+                        Log.i(Integer.toString(tmpTemp).concat(" ").concat(Integer.toString(tempd3max-20)), "tmpTemp3: ");
+                        if ((tmpTemp > tempd3max)) tempd3max = tmpTemp;
+                        if ((tmpTemp < tempd3min) && (tmpTemp > (tempd3max-20))) tempd3min = tmpTemp;
+                        //temp3 = temp3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
                         hum3 = hum3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
-                        phenomenon3 = "" + json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("00")) phenomenon31 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("06")) phenomenon32 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("12")) phenomenon33 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        if (hourJson.equals("18")) phenomenon34 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                     }
                 }
 
-                temp3d_1 = "" + temp1/24;
+                //temp3d_1 = "" + temp1/24;
                 hum3d_1 = "" + hum1/24;
-                temp3d_2 = "" + temp2/24;
+                //temp3d_2 = "" + temp2/24;
                 hum3d_2 = "" + hum2/24;
-                temp3d_3 = "" + temp3/24;
+                //temp3d_3 = "" + temp3/24;
                 hum3d_3 = "" + hum3/24;
 
             } catch (JSONException e) {
@@ -129,22 +153,41 @@ public class weather3forecast extends AppCompatActivity {
         protected void onPostExecute(Void result) {
 
 
-            Log.e("Error phen:", phenomenon);
+            //Log.e("Error phen:", phenomenon11);
 
             day1.setText(today1);
-            txtTemp3d_1.setText(temp3d_1.concat(" °C"));
+            txtTemp3d_1.setText(Integer.toString(tempd1min).concat("/").concat(Integer.toString(tempd1max)).concat(" °C"));
+            //txtTemp3d_1.setText(temp3d_1.concat(" °C").concat(" ").concat(Integer.toString(tempd1max)));
             txtHum3d_1.setText(hum3d_1.concat(" %"));
-            skyIcon(phenomenon, imgIco);
+            if (phenomenon13 != null) {
+                imgIco.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon13, imgIco);
+            } else {
+                imgIco.setVisibility(View.INVISIBLE);
+            }
 
             day2.setText(today2);
-            txtTemp3d_2.setText(temp3d_2.concat(" °C"));
+            txtTemp3d_2.setText(Integer.toString(tempd2min).concat("/").concat(Integer.toString(tempd2max)));
+            //txtTemp3d_1.setText(temp3d_1.concat(" °C").concat(" ").concat(Integer.toString(tempd1max)));
             txtHum3d_2.setText(hum3d_2.concat(" %"));
-            skyIcon(phenomenon2, imgIco2);
+            if (phenomenon21 != null) {
+                imgIco2.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon21, imgIco2);
+            } else {
+                imgIco2.setVisibility(View.INVISIBLE);
+            }
 
             day3.setText(today3);
-            txtTemp3d_3.setText(temp3d_3.concat(" °C"));
+            txtTemp3d_3.setText(Integer.toString(tempd3min).concat("/").concat(Integer.toString(tempd3max)));
+            //txtTemp3d_1.setText(temp3d_1.concat(" °C").concat(" ").concat(Integer.toString(tempd1max)));
             txtHum3d_3.setText(hum3d_3.concat(" %"));
-            skyIcon(phenomenon3, imgIco3);
+            if (phenomenon33 != null) {
+                Log.i(phenomenon33, "Weather: ");
+                imgIco3.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon33, imgIco3);
+            } else {
+                imgIco3.setVisibility(View.INVISIBLE);
+            }
 
             super.onPostExecute(result);
         }
@@ -183,7 +226,7 @@ public class weather3forecast extends AppCompatActivity {
             case "Showers":
                 imgV.setImageResource(R.drawable.heavy_rain);
                 break;
-            case "Thunderstorm":
+            case "Thunderstorms":
                 imgV.setImageResource(R.drawable.thunderstorm);
                 break;
             case "Snow":

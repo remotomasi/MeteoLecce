@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
                 temp = json.getJSONObject("main").getString("temp");
                 hum = json.getJSONObject("main").getString("humidity");
                 wPow = json.getJSONObject("wind").getString("speed");
-                wDir = json.getJSONObject("wind").getString("deg");
-                clouds = json.getJSONObject("clouds").getString("all");
-                phenomenon = "" + json.getJSONArray("weather").getJSONObject(0).getString("description");
+                if (json.getJSONObject("wind").has("deg")) wDir = json.getJSONObject("wind").getString("deg");
+                if (json.getJSONObject("wind").has("all")) clouds = json.getJSONObject("clouds").getString("all");
+                if (json.getJSONObject("wind").has("description")) phenomenon = "" + json.getJSONArray("weather").getJSONObject(0).getString("description");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -95,15 +95,19 @@ public class MainActivity extends AppCompatActivity {
 
             txtDate.setText(today);
 
-            txtTemp.setText(String.format("%.2f", tt).concat(" °C"));
+            txtTemp.setText(String.format("%.1f", tt).concat(" °C"));
             txtHum.setText(hum.concat(" %"));
-            txtWPow.setText(String.format("%.2f", wp).concat(" Km/h"));
-            Log.e("Error wDir:", "" + Double.parseDouble(wDir));
-            if (!wDir.equals("")) txtWDir.setText(windDirection((int)Double.parseDouble(wDir)));
-            txtClouds.setText(clouds.concat(" %"));
-            txtPhenomen.setText(skyConversion(phenomenon));
-            skyIcon(skyConversion(phenomenon), imgIco);
-
+            txtWPow.setText(String.format("%.1f", wp).concat(" Km/h"));
+            //Log.e("Error wDir:", "" + Double.parseDouble(wDir));
+            if (wDir != null) txtWDir.setText(windDirection((int)Double.parseDouble(wDir)));
+            if (clouds != null) txtClouds.setText(clouds.concat(" %"));
+            if (phenomenon != null) {
+                imgIco.setVisibility(View.VISIBLE);
+                txtPhenomen.setText(skyConversion(phenomenon));
+                skyIcon(skyConversion(phenomenon), imgIco);
+            } else {
+                imgIco.setVisibility(View.INVISIBLE);
+            }
             super.onPostExecute(result);
         }
     }
