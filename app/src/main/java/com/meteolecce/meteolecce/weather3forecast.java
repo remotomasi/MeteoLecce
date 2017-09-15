@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +30,14 @@ public class weather3forecast extends AppCompatActivity {
     int hum1 = 0, hum2 = 0, hum3 = 0;
     String temp3d_1 = null, hum3d_1 = null, dateJson = null,
             temp3d_2 = null, hum3d_2 = null,
-            temp3d_3 = null, hum3d_3 = null;
+            temp3d_3 = null, hum3d_3 = null,
+            phenomenon = null, phenomenon2 = null, phenomenon3 = null;
     final String site3d = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // hh:mm:ss
+    ImageView imgIco = null, imgIco2 = null, imgIco3 = null;
 
     Date today = new Date();
-    long ltime1 = today.getTime()+1*24*60*60*1000;
+    long ltime1 = today.getTime()+24*60*60*1000;
     long ltime2 = today.getTime()+2*24*60*60*1000;
     long ltime3 = today.getTime()+3*24*60*60*1000;
     String today1 = sdf.format(ltime1);
@@ -62,11 +66,13 @@ public class weather3forecast extends AppCompatActivity {
             day3 = (TextView) findViewById(R.id.textView29);
             txtTemp3d_3 = (TextView) findViewById(R.id.textView31);
             txtHum3d_3 = (TextView) findViewById(R.id.textView33);
+            imgIco = (ImageView) findViewById(R.id.imageViewIcon);
+            imgIco2 = (ImageView) findViewById(R.id.imageViewIcon2);
+            imgIco3 = (ImageView) findViewById(R.id.imageViewIcon3);
 
             String str3d = "";
             HttpResponse response;
             DefaultHttpClient myClient3d = new DefaultHttpClient();
-            //HttpClient myClient = HttpClientBuilder.create().build();
             HttpPost myConnection = new HttpPost(site3d);
 
             try {
@@ -92,14 +98,17 @@ public class weather3forecast extends AppCompatActivity {
                     if (today1.equals(dateJson)) {
                         temp1 = temp1 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
                         hum1 = hum1 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
+                        phenomenon = "" + json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                     }
                     if (today2.equals(dateJson)) {
                         temp2 = temp2 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
                         hum2 = hum2 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
+                        phenomenon2 = "" + json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                     }
                     if (today3.equals(dateJson)) {
                         temp3 = temp3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
                         hum3 = hum3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
+                        phenomenon3 = "" + json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                     }
                 }
 
@@ -119,17 +128,23 @@ public class weather3forecast extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
 
+
+            Log.e("Error phen:", phenomenon);
+
             day1.setText(today1);
-            txtTemp3d_1.setText(temp3d_1 + " °C");
-            txtHum3d_1.setText(hum3d_1 + " %");
+            txtTemp3d_1.setText(temp3d_1.concat(" °C"));
+            txtHum3d_1.setText(hum3d_1.concat(" %"));
+            skyIcon(phenomenon, imgIco);
 
             day2.setText(today2);
-            txtTemp3d_2.setText(temp3d_2 + " °C");
-            txtHum3d_2.setText(hum3d_2 + " %");
+            txtTemp3d_2.setText(temp3d_2.concat(" °C"));
+            txtHum3d_2.setText(hum3d_2.concat(" %"));
+            skyIcon(phenomenon2, imgIco2);
 
             day3.setText(today3);
-            txtTemp3d_3.setText(temp3d_3 + " °C");
-            txtHum3d_3.setText(hum3d_3 + " %");
+            txtTemp3d_3.setText(temp3d_3.concat(" °C"));
+            txtHum3d_3.setText(hum3d_3.concat(" %"));
+            skyIcon(phenomenon3, imgIco3);
 
             super.onPostExecute(result);
         }
@@ -137,18 +152,47 @@ public class weather3forecast extends AppCompatActivity {
 
     /** Called when the user taps the Send button */
     public void actualSituation(View view) {
-        Intent intent=new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    /** Convert degree in a human comprehensible thing */
+    public void skyIcon(String value, ImageView imgV) {
 
-    private abstract class GetContacts extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Toast.makeText(weather3forecast.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
-
+        switch (value) {
+            case "Fair":
+            case "Sunny":
+                imgV.setImageResource(R.drawable.sun);
+                break;
+            case "Scattered Clouds":
+            case "Mainly Clear":
+                imgV.setImageResource(R.drawable.sun_and_cloud);
+                break;
+            case "Partly Cloudy":
+                imgV.setImageResource(R.drawable.bit_cloudy);
+                break;
+            case "Cloudy":
+                imgV.setImageResource(R.drawable.cloudy);
+                break;
+            case "Rain":
+                imgV.setImageResource(R.drawable.rain);
+                break;
+            case "Intermittent Rain":
+                imgV.setImageResource(R.drawable.very_light_rain);
+                break;
+            case "Showers":
+                imgV.setImageResource(R.drawable.heavy_rain);
+                break;
+            case "Thunderstorm":
+                imgV.setImageResource(R.drawable.thunderstorm);
+                break;
+            case "Snow":
+            case "Light Snow":
+                imgV.setImageResource(R.drawable.snow);
+                break;
+            case "Mist or Fog":
+                imgV.setImageResource(R.drawable.fog3);
+                break;
         }
     }
 }

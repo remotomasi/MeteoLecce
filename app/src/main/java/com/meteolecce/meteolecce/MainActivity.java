@@ -33,16 +33,13 @@ public class MainActivity extends AppCompatActivity {
     Date date = Calendar.getInstance().getTime();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // hh:mm:ss
     String today = sdf.format(date);
-    ImageView imgIco = null, imgIco2 = null;
+    ImageView imgIco = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Get the Intent that started this activity
-        Intent intent = getIntent();
 
         new readWeatherLecce().execute();
     }
@@ -64,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             String str = "";
             HttpResponse response;
             DefaultHttpClient myClient = new DefaultHttpClient();
-            //HttpClient myClient = HttpClientBuilder.create().build();
             HttpPost myConnection = new HttpPost(site);
 
             try {
@@ -99,12 +95,12 @@ public class MainActivity extends AppCompatActivity {
 
             txtDate.setText(today);
 
-            txtTemp.setText(String.format("%.2f", tt) + " °C");
-            txtHum.setText(hum + " %");
-            txtWPow.setText(String.format("%.2f", wp) + " Km/h");
+            txtTemp.setText(String.format("%.2f", tt).concat(" °C"));
+            txtHum.setText(hum.concat(" %"));
+            txtWPow.setText(String.format("%.2f", wp).concat(" Km/h"));
             Log.e("Error wDir:", "" + Double.parseDouble(wDir));
-            if (wDir != "") txtWDir.setText(windDirection((int)Double.parseDouble(wDir)));
-            txtClouds.setText(clouds + " %");
+            if (!wDir.equals("")) txtWDir.setText(windDirection((int)Double.parseDouble(wDir)));
+            txtClouds.setText(clouds.concat(" %"));
             txtPhenomen.setText(skyConversion(phenomenon));
             skyIcon(skyConversion(phenomenon), imgIco);
 
@@ -154,26 +150,37 @@ public class MainActivity extends AppCompatActivity {
     public String skyConversion(String value) {
         String sky = null;
 
-        if (value.equals("few clouds")) {
-            sky = "Poche nubi";
-        } else if (value.equals("thunderstorm")) {
-            sky = "Temporale";
-        } else if (value.equals("clear sky")) {
-            sky = "Sereno";
-        } else if (value.equals("scattered clouds")) {
-            sky = "Nubi sparse";
-        } else if (value.equals("broken clouds")) {
-            sky = "Nuvoloso";
-        } else if (value.equals("shower rain")) {
-            sky = "Pioggia intensa";
-        } else if (value.equals("rain")) {
-            sky = "Pioggia";
-        } else if (value.equals("light rain")) {
-            sky = "Pioggia leggera";
-        } else if (value.equals("snow")) {
-            sky = "Neve";
-        } else if (value.equals("mist")) {
-            sky = "Nebbia";
+        switch (value) {
+            case "few clouds":
+                sky = "poche nubi";
+                break;
+            case "thunderstorm":
+                sky = "temporale";
+                break;
+            case "clear sky":
+                sky = "sereno";
+                break;
+            case "scattered clouds":
+                sky = "nubi sparse";
+                break;
+            case "broken clouds":
+                sky = "nuvoloso";
+                break;
+            case "shower rain":
+                sky = "pioggia intensa";
+                break;
+            case "rain":
+                sky = "pioggia";
+                break;
+            case "light rain":
+                sky = "pioggia leggera";
+                break;
+            case "snow":
+                sky = "neve";
+                break;
+            case "mist":
+                sky = "nebbia";
+                break;
         }
 
         return sky;
@@ -182,36 +189,37 @@ public class MainActivity extends AppCompatActivity {
     /** Convert degree in a human comprehensible thing */
     public void skyIcon(String value, ImageView imgV) {
 
-        if (value.equals("sereno")) {
-            imgV.setImageResource(R.drawable.sun);
-        } else if (value.equals("Poche nubi")) {
-            imgV.setImageResource(R.drawable.sun_and_cloud);
-        } else if (value.equals("Nubi sparse")) {
-            imgV.setImageResource(R.drawable.bit_cloudy);
-        } else if (value.equals("Nuvoloso")) {
-            imgV.setImageResource(R.drawable.cloudy);
-        } else if (value.equals("Pioggia")) {
-            imgV.setImageResource(R.drawable.rain);
-        } else if (value.equals("Pioggia leggera")) {
-            imgV.setImageResource(R.drawable.very_light_rain);
-        } else if (value.equals("Pioggia intensa")) {
-            imgV.setImageResource(R.drawable.heavy_rain);
-        } else if (value.equals("Temporale")) {
-            imgV.setImageResource(R.drawable.thunderstorm);
-        } else if (value.equals("Neve")) {
-            imgV.setImageResource(R.drawable.snow);
-        } else if (value.equals("Nebbia")) {
-            imgV.setImageResource(R.drawable.fog3);
-        }
-    }
-
-    private abstract class GetContacts extends AsyncTask<Void, Void, Void> {
-        //public void readWeatherLecce() {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Toast.makeText(MainActivity.this, "Json Data is downloading", Toast.LENGTH_LONG).show();
-
+        switch (value) {
+            case "sereno":
+                imgV.setImageResource(R.drawable.sun);
+                break;
+            case "Poche nubi":
+                imgV.setImageResource(R.drawable.sun_and_cloud);
+                break;
+            case "nubi sparse":
+                imgV.setImageResource(R.drawable.bit_cloudy);
+                break;
+            case "nuvoloso":
+                imgV.setImageResource(R.drawable.cloudy);
+                break;
+            case "pioggia":
+                imgV.setImageResource(R.drawable.rain);
+                break;
+            case "pioggia leggera":
+                imgV.setImageResource(R.drawable.very_light_rain);
+                break;
+            case "pioggia intensa":
+                imgV.setImageResource(R.drawable.heavy_rain);
+                break;
+            case "temporale":
+                imgV.setImageResource(R.drawable.thunderstorm);
+                break;
+            case "neve":
+                imgV.setImageResource(R.drawable.snow);
+                break;
+            case "nebbia":
+                imgV.setImageResource(R.drawable.fog3);
+                break;
         }
     }
 }
