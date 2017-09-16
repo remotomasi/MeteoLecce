@@ -2,14 +2,12 @@ package com.meteolecce.meteolecce;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -38,7 +36,9 @@ public class weather3forecast extends AppCompatActivity {
             phenomenon31 = null, phenomenon32 = null, phenomenon33 = null, phenomenon34 = null;
     final String site3d = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // hh:mm:ss
-    ImageView imgIco = null, imgIco2 = null, imgIco3 = null;
+    ImageView imgIco11 = null, imgIco12 = null, imgIco13 = null, imgIco14 =null,
+            imgIco21 = null, imgIco22 = null, imgIco23 = null, imgIco24 = null,
+            imgIco31 = null, imgIco32 = null, imgIco33 = null, imgIco34 = null;
 
     Date today = new Date();
     long ltime1 = today.getTime()+24*60*60*1000;
@@ -70,9 +70,18 @@ public class weather3forecast extends AppCompatActivity {
             day3 = (TextView) findViewById(R.id.textView29);
             txtTemp3d_3 = (TextView) findViewById(R.id.textView31);
             txtHum3d_3 = (TextView) findViewById(R.id.textView33);
-            imgIco = (ImageView) findViewById(R.id.imageViewIcon);
-            imgIco2 = (ImageView) findViewById(R.id.imageViewIcon2);
-            imgIco3 = (ImageView) findViewById(R.id.imageViewIcon3);
+            imgIco11 = (ImageView) findViewById(R.id.imageViewIcon);
+            imgIco12 = (ImageView) findViewById(R.id.imageViewIcon12);
+            imgIco13 = (ImageView) findViewById(R.id.imageViewIcon13);
+            imgIco14 = (ImageView) findViewById(R.id.imageViewIcon14);
+            imgIco21 = (ImageView) findViewById(R.id.imageViewIcon2);
+            imgIco22 = (ImageView) findViewById(R.id.imageViewIcon22);
+            imgIco23 = (ImageView) findViewById(R.id.imageViewIcon23);
+            imgIco24 = (ImageView) findViewById(R.id.imageViewIcon24);
+            imgIco31 = (ImageView) findViewById(R.id.imageViewIcon3);
+            imgIco32 = (ImageView) findViewById(R.id.imageViewIcon32);
+            imgIco33 = (ImageView) findViewById(R.id.imageViewIcon33);
+            imgIco34 = (ImageView) findViewById(R.id.imageViewIcon34);
 
             String str3d = "";
             HttpResponse response;
@@ -97,7 +106,7 @@ public class weather3forecast extends AppCompatActivity {
                 dateJson = null;
                 temp1 = temp2 = temp3 = 0;
                 hum1 = hum2 = hum3 = 0;
-                for (int i = 0; i < 150; i++) {
+                for (int i = 0; i < 130; i++) {
                     dateJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(0,10);
                     hourJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(11,13);
                     if (today1.equals(dateJson)) {
@@ -158,35 +167,88 @@ public class weather3forecast extends AppCompatActivity {
             day1.setText(today1);
             txtTemp3d_1.setText(Integer.toString(tempd1min).concat("/").concat(Integer.toString(tempd1max)).concat(" °C"));
             //txtTemp3d_1.setText(temp3d_1.concat(" °C").concat(" ").concat(Integer.toString(tempd1max)));
-            txtHum3d_1.setText(hum3d_1.concat(" %"));
-            if (phenomenon13 != null) {
-                imgIco.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon13, imgIco);
+            if (hum3d_1 != null) txtHum3d_1.setText(hum3d_1.concat(" %"));
+            if (phenomenon11 != null) {
+                imgIco11.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon11, imgIco11);
             } else {
-                imgIco.setVisibility(View.INVISIBLE);
+                imgIco11.setVisibility(View.INVISIBLE);
+            }
+            if (phenomenon12 != null) {
+                imgIco12.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon12, imgIco12);
+            } else {
+                imgIco12.setVisibility(View.INVISIBLE);
+            }
+            if (phenomenon13 != null) {
+                imgIco13.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon13, imgIco13);
+            } else {
+                imgIco13.setVisibility(View.INVISIBLE);
+            }
+            if (phenomenon14 != null) {
+                imgIco14.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon14, imgIco14);
+            } else {
+                imgIco14.setVisibility(View.INVISIBLE);
             }
 
             day2.setText(today2);
             txtTemp3d_2.setText(Integer.toString(tempd2min).concat("/").concat(Integer.toString(tempd2max)));
             //txtTemp3d_1.setText(temp3d_1.concat(" °C").concat(" ").concat(Integer.toString(tempd1max)));
-            txtHum3d_2.setText(hum3d_2.concat(" %"));
+            if (hum3d_2 != null) txtHum3d_2.setText(hum3d_2.concat(" %"));
             if (phenomenon21 != null) {
-                imgIco2.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon21, imgIco2);
+                imgIco21.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon21, imgIco21);
             } else {
-                imgIco2.setVisibility(View.INVISIBLE);
+                imgIco21.setVisibility(View.INVISIBLE);
+            }
+            if (phenomenon22 != null) {
+                imgIco22.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon22, imgIco22);
+            } else {
+                imgIco22.setVisibility(View.INVISIBLE);
+            }
+            if (phenomenon23 != null) {
+                imgIco23.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon23, imgIco23);
+            } else {
+                imgIco23.setVisibility(View.INVISIBLE);
+            }
+            if (phenomenon24 != null) {
+                imgIco24.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon24, imgIco24);
+            } else {
+                imgIco24.setVisibility(View.INVISIBLE);
             }
 
             day3.setText(today3);
             txtTemp3d_3.setText(Integer.toString(tempd3min).concat("/").concat(Integer.toString(tempd3max)));
             //txtTemp3d_1.setText(temp3d_1.concat(" °C").concat(" ").concat(Integer.toString(tempd1max)));
-            txtHum3d_3.setText(hum3d_3.concat(" %"));
-            if (phenomenon33 != null) {
-                Log.i(phenomenon33, "Weather: ");
-                imgIco3.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon33, imgIco3);
+            if (hum3d_3 != null) txtHum3d_3.setText(hum3d_3.concat(" %"));
+            if (phenomenon31 != null) {
+                imgIco31.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon31, imgIco31);
             } else {
-                imgIco3.setVisibility(View.INVISIBLE);
+                imgIco31.setVisibility(View.INVISIBLE);
+            }
+            if (phenomenon32 != null) {
+                imgIco32.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon32, imgIco32);
+            } else {
+                imgIco32.setVisibility(View.INVISIBLE);
+            }
+            if (phenomenon33 != null) {
+                imgIco33.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon33, imgIco33);
+            } else {
+                imgIco33.setVisibility(View.INVISIBLE);
+            }
+            if (phenomenon34 != null) {
+                imgIco14.setVisibility(View.VISIBLE);
+                skyIcon(phenomenon34, imgIco34);
+            } else {
+                imgIco34.setVisibility(View.INVISIBLE);
             }
 
             super.onPostExecute(result);
@@ -205,6 +267,7 @@ public class weather3forecast extends AppCompatActivity {
         switch (value) {
             case "Fair":
             case "Sunny":
+                Log.i(value, "imgV: ");
                 imgV.setImageResource(R.drawable.sun);
                 break;
             case "Scattered Clouds":
