@@ -41,6 +41,7 @@ public class weather3forecast extends AppCompatActivity {
             imgIco31 = null, imgIco32 = null, imgIco33 = null, imgIco34 = null;
 
     Date today = new Date();
+    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy");
     long ltime1 = today.getTime()+24*60*60*1000;
     long ltime2 = today.getTime()+2*24*60*60*1000;
     long ltime3 = today.getTime()+3*24*60*60*1000;
@@ -164,7 +165,9 @@ public class weather3forecast extends AppCompatActivity {
 
             //Log.e("Error phen:", phenomenon11);
 
-            day1.setText(today1);
+            SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy");
+            String today31 = sdf3.format(ltime1);
+            day1.setText(today31);
             txtTemp3d_1.setText(Integer.toString(tempd1min).concat("/").concat(Integer.toString(tempd1max)).concat(" °C"));
             //txtTemp3d_1.setText(temp3d_1.concat(" °C").concat(" ").concat(Integer.toString(tempd1max)));
             if (hum3d_1 != null) txtHum3d_1.setText(hum3d_1.concat(" %"));
@@ -193,7 +196,8 @@ public class weather3forecast extends AppCompatActivity {
                 imgIco14.setVisibility(View.INVISIBLE);
             }
 
-            day2.setText(today2);
+            String today32 = sdf3.format(ltime2);
+            day2.setText(today32);
             txtTemp3d_2.setText(Integer.toString(tempd2min).concat("/").concat(Integer.toString(tempd2max)));
             //txtTemp3d_1.setText(temp3d_1.concat(" °C").concat(" ").concat(Integer.toString(tempd1max)));
             if (hum3d_2 != null) txtHum3d_2.setText(hum3d_2.concat(" %"));
@@ -222,7 +226,8 @@ public class weather3forecast extends AppCompatActivity {
                 imgIco24.setVisibility(View.INVISIBLE);
             }
 
-            day3.setText(today3);
+            String today33 = sdf3.format(ltime3);
+            day3.setText(today33);
             txtTemp3d_3.setText(Integer.toString(tempd3min).concat("/").concat(Integer.toString(tempd3max)));
             //txtTemp3d_1.setText(temp3d_1.concat(" °C").concat(" ").concat(Integer.toString(tempd1max)));
             if (hum3d_3 != null) txtHum3d_3.setText(hum3d_3.concat(" %"));
@@ -253,6 +258,15 @@ public class weather3forecast extends AppCompatActivity {
 
             super.onPostExecute(result);
         }
+    }
+
+    /**
+     * Called when the user taps the Update button
+     */
+    public void update(View view) {
+        Intent intent = new Intent(weather3forecast.this, weather3forecast.class);
+        startActivity(intent);
+        finish();
     }
 
     /** Called when the user taps the Send button */
