@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 hum = json.getJSONObject("main").getString("humidity");
                 wPow = json.getJSONObject("wind").getString("speed");
                 if (json.getJSONObject("wind").has("deg")) wDir = json.getJSONObject("wind").getString("deg");
-                if (json.getJSONObject("wind").has("all")) clouds = json.getJSONObject("clouds").getString("all");
-                if (json.getJSONObject("wind").has("description")) phenomenon = "" + json.getJSONArray("weather").getJSONObject(0).getString("description");
+                if (json.getJSONObject("clouds").has("all")) clouds = json.getJSONObject("clouds").getString("all");
+                if (json.getJSONArray("weather").getJSONObject(0).has("description")) phenomenon = "" + json.getJSONArray("weather").getJSONObject(0).getString("description");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             //Log.e("Error wDir:", "" + Double.parseDouble(wDir));
             if (wDir != null) txtWDir.setText(windDirection((int)Double.parseDouble(wDir)));
             if (clouds != null) txtClouds.setText(clouds.concat(" %"));
+            Log.i(phenomenon, "phen1 :");
             if (phenomenon != null) {
                 imgIco.setVisibility(View.VISIBLE);
                 txtPhenomen.setText(skyConversion(phenomenon));
