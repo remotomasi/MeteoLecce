@@ -214,74 +214,81 @@
         android:id="@+id/imageViewIcon"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView21"
-        app:srcCompat="@drawable/sun"
-        app:layout_constraintLeft_toRightOf="@+id/textView18"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/textView18"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView21"
+        app:srcCompat="@drawable/sun" />
 
     <ImageView
         android:id="@+id/imageViewIcon13"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        app:srcCompat="@drawable/sun"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon"
+        android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@+id/textView19"
-        android:layout_marginLeft="32dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon"
+        app:srcCompat="@drawable/sun" />
 
     <ImageView
         android:id="@+id/imageViewIcon14"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        app:srcCompat="@drawable/sun"
-        app:layout_constraintLeft_toRightOf="@+id/imageViewIcon13"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon12" />
+        android:visibility="invisible"
+        app:layout_constraintLeft_toRightOf="@+id/imageViewIcon13"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon12"
+        app:srcCompat="@drawable/sun" />
 
     <ImageView
         android:id="@+id/imageViewIcon22"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        app:srcCompat="@drawable/sun"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView22"
+        android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@+id/imageViewIcon2"
-        android:layout_marginLeft="0dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView22"
+        app:srcCompat="@drawable/sun" />
 
     <ImageView
         android:id="@+id/imageViewIcon24"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon22"
-        app:srcCompat="@drawable/sun"
+        android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@+id/imageViewIcon23"
-        android:layout_marginLeft="0dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon22"
+        app:srcCompat="@drawable/sun" />
 
     <ImageView
         android:id="@+id/imageViewIcon32"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        app:srcCompat="@drawable/sun"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView29"
+        android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@+id/imageViewIcon3"
-        android:layout_marginLeft="0dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView29"
+        app:srcCompat="@drawable/sun" />
 
     <ImageView
         android:id="@+id/imageViewIcon33"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        app:srcCompat="@drawable/sun"
-        app:layout_constraintLeft_toRightOf="@+id/textView33"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon3" />
+        android:visibility="invisible"
+        app:layout_constraintLeft_toRightOf="@+id/textView33"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon3"
+        app:srcCompat="@drawable/sun" />
 
     <ImageView
         android:id="@+id/imageViewIcon34"
@@ -289,6 +296,7 @@
         android:layout_height="32dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
+        android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@+id/imageViewIcon33"
         app:layout_constraintTop_toBottomOf="@+id/imageViewIcon32"
         app:srcCompat="@drawable/sun" />
@@ -297,11 +305,12 @@
         android:id="@+id/imageViewIcon12"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        app:srcCompat="@drawable/sun"
-        app:layout_constraintLeft_toRightOf="@+id/imageViewIcon"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        android:visibility="invisible"
+        app:layout_constraintLeft_toRightOf="@+id/imageViewIcon"
+        app:layout_constraintTop_toBottomOf="@+id/textView21"
+        app:srcCompat="@drawable/sun" />
 
     <ImageView
         android:id="@+id/imageViewIcon3"
@@ -309,6 +318,7 @@
         android:layout_height="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
+        android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@+id/textView31"
         app:layout_constraintTop_toBottomOf="@+id/textView29"
         app:srcCompat="@drawable/sun" />
@@ -317,21 +327,23 @@
         android:id="@+id/imageViewIcon2"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        app:srcCompat="@drawable/sun"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView22"
+        android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@+id/textView24"
-        android:layout_marginLeft="32dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView22"
+        app:srcCompat="@drawable/sun" />
 
     <ImageView
         android:id="@+id/imageViewIcon23"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        app:srcCompat="@drawable/sun"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon2"
+        android:visibility="invisible"
         app:layout_constraintLeft_toRightOf="@+id/textView28"
-        android:layout_marginLeft="32dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewIcon2"
+        app:srcCompat="@drawable/sun" />
 
     <Button
         android:id="@+id/button5"

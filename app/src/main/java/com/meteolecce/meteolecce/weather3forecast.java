@@ -250,7 +250,7 @@ public class weather3forecast extends AppCompatActivity {
                 imgIco33.setVisibility(View.INVISIBLE);
             }
             if (phenomenon34 != null) {
-                imgIco14.setVisibility(View.VISIBLE);
+                imgIco34.setVisibility(View.VISIBLE);
                 skyIcon(phenomenon34, imgIco34);
             } else {
                 imgIco34.setVisibility(View.INVISIBLE);
