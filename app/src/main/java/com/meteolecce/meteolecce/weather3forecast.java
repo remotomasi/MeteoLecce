@@ -61,7 +61,6 @@ public class weather3forecast extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-
             day1 = (TextView) findViewById(R.id.textView21);
             txtTemp3d_1 = (TextView) findViewById(R.id.textView18);
             txtHum3d_1 = (TextView) findViewById(R.id.textView19);

@@ -175,6 +175,9 @@ public class MainActivity extends AppCompatActivity {
             case "thunderstorm":
                 sky = "temporale";
                 break;
+            case "thunderstorm with rain":
+                sky = "temporale con pioggia";
+                break;
             case "clear sky":
                 sky = "sereno";
                 break;
@@ -233,6 +236,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "temporale":
                 imgV.setImageResource(R.drawable.thunderstorm);
+                break;
+            case "temporale con pioggia":
+                imgV.setImageResource(R.drawable.thunderstormandrain);
                 break;
             case "neve":
                 imgV.setImageResource(R.drawable.snow);
