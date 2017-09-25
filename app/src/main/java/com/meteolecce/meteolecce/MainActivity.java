@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
             case "sereno":
                 imgV.setImageResource(R.drawable.sun);
                 break;
-            case "Poche nubi":
+            case "poche nubi":
                 imgV.setImageResource(R.drawable.sun_and_cloud);
                 break;
             case "nubi sparse":
