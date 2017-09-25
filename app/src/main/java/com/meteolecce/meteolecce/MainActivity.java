@@ -192,6 +192,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "rain":
                 sky = "pioggia";
+            case "moderate rain":
+                sky = "pioggia moderata";
                 break;
             case "light rain":
                 sky = "pioggia leggera";
@@ -229,6 +231,9 @@ public class MainActivity extends AppCompatActivity {
                 imgV.setImageResource(R.drawable.rain);
                 break;
             case "pioggia leggera":
+                imgV.setImageResource(R.drawable.very_light_rain);
+                break;
+            case "pioggia moderata":
                 imgV.setImageResource(R.drawable.very_light_rain);
                 break;
             case "pioggia intensa":
