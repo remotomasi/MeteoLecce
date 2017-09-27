@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 import org.json.JSONObject;
 import org.apache.http.HttpResponse;

@@ -34,7 +34,7 @@ public class weather3forecast extends AppCompatActivity {
             phenomenon11 = null, phenomenon12 = null, phenomenon13 = null, phenomenon14 = null,
             phenomenon21 = null, phenomenon22 = null, phenomenon23 = null, phenomenon24 = null,
             phenomenon31 = null, phenomenon32 = null, phenomenon33 = null, phenomenon34 = null;
-    final String site3d = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
+    final String site3d = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.35&lon=18.16&lid=22553";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // hh:mm:ss
     ImageView imgIco11 = null, imgIco12 = null, imgIco13 = null, imgIco14 =null,
             imgIco21 = null, imgIco22 = null, imgIco23 = null, imgIco24 = null,
@@ -269,15 +269,15 @@ public class weather3forecast extends AppCompatActivity {
     public void skyIcon(String value, ImageView imgV) {
 
         switch (value) {
-            case "Fair":
             case "Sunny":
                 Log.i(value, "imgV: ");
                 imgV.setImageResource(R.drawable.sun);
                 break;
-            case "Scattered Clouds":
+            case "Fair":
             case "Mainly Clear":
                 imgV.setImageResource(R.drawable.few_clouds);
                 break;
+            case "Scattered Clouds":
             case "Partly Cloudy":
                 imgV.setImageResource(R.drawable.partly_cloudy);
                 break;
