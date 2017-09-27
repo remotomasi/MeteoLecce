@@ -14,7 +14,7 @@
     <string name="humName">Umidità</string>
     <string name="titleMainPage">SITUAZIONE ATTUALE</string>
     <string name="update">Aggiorna</string>
-    <string name="cloudsName">Cielo</string>
+    <string name="cloudsName">Copertura</string>
     <string name="clouds"></string>
     <string name="phenomenon"></string>
     <string name="titleWeather3Forecast">PROSSIMI 3 GIORNI</string>

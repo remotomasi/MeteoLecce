@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import org.json.JSONObject;
 import org.apache.http.HttpResponse;
@@ -30,11 +31,19 @@ public class MainActivity extends AppCompatActivity {
 
     TextView txtDate = null, txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null, txtClouds = null,
             txtPhenomen = null;
-    String temp = null, press = null, hum = null, wPow = null, wDir = null, clouds = null, phenomenon = null;
+    String temp = null, press = null, hum = null, wPow = null, wDir = null, clouds = null, phenomenon = null,
+            dateJson = null, hourJson = null;
     final String site = "http://api.openweathermap.org/data/2.5/weather?q=Lecce,it&appid=35222ccfcb5285d12e8a0e3222d59d9c";
+    final String metcheck = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
     Date date = Calendar.getInstance().getTime();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // hh:mm:ss
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss"); // hh:mm:ss
+    SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdfmN = new SimpleDateFormat("dd/MM/yyyy");
     String today = sdf.format(date);
+    long ltime = date.getTime()-2*60*60*1000; // subtract an hour for UTC time
+    String today1 = sdf.format(ltime);
+    String todaym = sdfm.format(ltime);
+    String todaymN = sdfmN.format(date);
     ImageView imgIco = null;
 
 
@@ -63,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             String str = "";
             HttpResponse response;
             DefaultHttpClient myClient = new DefaultHttpClient();
-            HttpPost myConnection = new HttpPost(site);
+            HttpPost myConnection = new HttpPost(metcheck);
 
             try {
                 response = myClient.execute(myConnection);
@@ -74,16 +83,29 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             try {
+                dateJson = null;
                 JSONObject json = new JSONObject(str);
-                temp = json.getJSONObject("main").getString("temp");
-                hum = json.getJSONObject("main").getString("humidity");
-                wPow = json.getJSONObject("wind").getString("speed");
-                if (json.getJSONObject("wind").has("deg"))
-                    wDir = json.getJSONObject("wind").getString("deg");
-                if (json.getJSONObject("clouds").has("all"))
-                    clouds = json.getJSONObject("clouds").getString("all");
-                if (json.getJSONArray("weather").getJSONObject(0).has("description"))
-                    phenomenon = "" + json.getJSONArray("weather").getJSONObject(0).getString("description");
+
+                for (int i = 0; i < 130; i++) {
+                    dateJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(0, 10);
+                    hourJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(11, 13);
+                    if (todaym.substring(0, 10).equals(dateJson) && (today1.substring(11,13).equals(hourJson))) {
+                        Log.i("VALORI: ", today1.substring(11,13).concat(" ").concat(hourJson).concat(" ").concat(dateJson).concat(" ").concat(today1).concat(" ").concat(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName")));
+                        temp = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature");
+                        hum = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity");
+                        wPow = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed");
+                        wDir = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection");
+                        clouds = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("totalcloud");
+                        phenomenon = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+        /*
+                        if (json.getJSONObject("wind").has("deg"))
+                            wDir = json.getJSONObject("wind").getString("deg");
+                        if (json.getJSONObject("clouds").has("all"))
+                            clouds = json.getJSONObject("clouds").getString("all");
+                        if (json.getJSONArray("weather").getJSONObject(0).has("description"))
+                            phenomenon = "" + json.getJSONArray("weather").getJSONObject(0).getString("description");*/
+                    }
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -92,13 +114,16 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+            Double tt = null;
+            Double wp = null;
+            if (temp!= null) tt = Double.parseDouble(temp);
+            if (wPow != null) {
+                wp = Double.parseDouble(wPow);
+                wp = wp / 1.619; // miglia // m/s * 3.6;
+            }
+            //tt = tt - 273.15;*/
 
-            Double tt = Double.parseDouble(temp);
-            Double wp = Double.parseDouble(wPow);
-            wp = wp * 3.6;
-            tt = tt - 273.15;
-
-            txtDate.setText(today);
+            txtDate.setText(todaymN.substring(0, 10));
 
             txtTemp.setText(String.format("%.1f", tt).concat(" °C"));
             txtHum.setText(hum.concat(" %"));
@@ -106,11 +131,11 @@ public class MainActivity extends AppCompatActivity {
             //Log.e("Error wDir:", "" + Double.parseDouble(wDir));
             if (wDir != null) txtWDir.setText(windDirection((int) Double.parseDouble(wDir)));
             if (clouds != null) txtClouds.setText(clouds.concat(" %"));
-            Log.i(phenomenon, "phen1 :");
+            //Log.i(phenomenon, "phen1 :");
             if (phenomenon != null) {
                 imgIco.setVisibility(View.VISIBLE);
                 txtPhenomen.setText(skyConversion(phenomenon));
-                skyIcon(skyConversion(phenomenon), imgIco);
+                skyIcon(phenomenon, imgIco);
             } else {
                 imgIco.setVisibility(View.INVISIBLE);
             }
@@ -163,49 +188,76 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Convert degree in a human comprehensible thing
+     * Translation
      */
     public String skyConversion(String value) {
         String sky = null;
 
         switch (value) {
-            case "few clouds":
-                sky = "poche nubi";
+            case "Sunny":
+                sky = "Sereno";
                 break;
-            case "thunderstorm":
-                sky = "temporale";
+            case "Fair":
+                sky = "Poche nubi";
                 break;
-            case "thunderstorm with rain":
-                sky = "temporale con pioggia";
+            case "Partly Cloudy":
+                sky = "Parzialmente nuvoloso";
                 break;
-            case "clear sky":
-                sky = "sereno";
+            case "Mostly Cloudy":
+                sky = "Molto nuvoloso";
                 break;
-            case "scattered clouds":
-                sky = "nubi sparse";
+            case "Cloudy":
+                sky = "Nuvoloso";
                 break;
-            case "broken clouds":
-                sky = "nuvoloso";
-                break;
-            case "shower rain":
-                sky = "pioggia intensa";
-                break;
-            case "rain":
-                sky = "pioggia";
-            case "moderate rain":
-                sky = "pioggia moderata";
-                break;
-            case "light rain":
-                sky = "pioggia leggera";
-                break;
-            case "snow":
-                sky = "neve";
-                break;
-            case "mist":
+            case "Mist":
                 sky = "nebbia";
                 break;
+            case "Intermittent Rain":
+                sky = "Pioggia intermittente";
+                break;
+            case "Drizzle":
+                sky = "Pioggerella";
+                break;
+            case "Light Rain":
+                sky = "Pioggia leggera";
+                break;
+            case "Showers":
+                sky = "Pioggia";
+                break;
+            case "Rain Showers":
+                sky = "Rovescio";
+                break;
+            case "Heavy Rain":
+                sky = "Pioggia forte";
+                break;
+            case "Light Snow":
+                sky = "Neve leggera";
+                break;
+            case "Light Sleet":
+                sky = "Nevischio";
+                break;
+            case "Heavy Snow":
+                sky = "Forte nevicata";
+                break;
+            case "Heavy Sleet":
+                sky = "Pesante nevischio";
+                break;
+            case "Thunderstorms":
+                sky = "Temporale";
+                break;
+            case "Wet & Windy":
+                sky = "Umido e ventoso";
+                break;
+            case "Hail":
+                sky = "Grandine";
+                break;
+            case "Snow Showers":
+                sky = "Scarica di neve";
+                break;
+            case "Dry & Windy":
+                sky = "Secco e ventoso";
+                break;
         }
-
         return sky;
     }
 
@@ -215,41 +267,47 @@ public class MainActivity extends AppCompatActivity {
     public void skyIcon(String value, ImageView imgV) {
 
         switch (value) {
-            case "sereno":
+            case "Sunny":
                 imgV.setImageResource(R.drawable.sun);
                 break;
-            case "Poche nubi":
-                imgV.setImageResource(R.drawable.sun_and_cloud);
+            case "Fair":
+                imgV.setImageResource(R.drawable.few_clouds);
                 break;
-            case "nubi sparse":
-                imgV.setImageResource(R.drawable.bit_cloudy);
+            case "Partly Cloudy":
+                imgV.setImageResource(R.drawable.partly_cloudy);
                 break;
-            case "nuvoloso":
+            case "Cloudy":
                 imgV.setImageResource(R.drawable.cloudy);
                 break;
-            case "pioggia":
+            case "Light Rain":
+                imgV.setImageResource(R.drawable.light_rain);
+                break;
+            case "Showers":
                 imgV.setImageResource(R.drawable.rain);
                 break;
-            case "pioggia leggera":
-                imgV.setImageResource(R.drawable.very_light_rain);
+            case "Drizzle":
+                imgV.setImageResource(R.drawable.light_rain);
                 break;
-            case "pioggia moderata":
-                imgV.setImageResource(R.drawable.very_light_rain);
-                break;
-            case "pioggia intensa":
+            case "Rain Showers":
                 imgV.setImageResource(R.drawable.heavy_rain);
                 break;
-            case "temporale":
+            case "Thunderstorms":
                 imgV.setImageResource(R.drawable.thunderstorm);
                 break;
-            case "temporale con pioggia":
-                imgV.setImageResource(R.drawable.thunderstormandrain);
+            case "Light Sleet":
+                imgV.setImageResource(R.drawable.sleet);
                 break;
-            case "neve":
+            case "Light Snow":
+                imgV.setImageResource(R.drawable.sleet);
+                break;
+            case "Heavy Snow":
                 imgV.setImageResource(R.drawable.snow);
                 break;
-            case "nebbia":
-                imgV.setImageResource(R.drawable.fog3);
+            case "Heavy Sleet":
+                imgV.setImageResource(R.drawable.snow);
+                break;
+            case "Mist":
+                imgV.setImageResource(R.drawable.fog);
                 break;
         }
     }
