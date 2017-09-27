@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat sdfmN = new SimpleDateFormat("dd/MM/yyyy");
     String today = sdf.format(date);
-    long ltime = date.getTime()-2*60*60*1000; // subtract an hour for UTC time
+    long ltime = date.getTime() - 1*60*60*1000; // subtract an hour or two hours for UTC time
     String today1 = sdf.format(ltime);
     String todaym = sdfm.format(ltime);
     String todaymN = sdfmN.format(date);
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     dateJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(0, 10);
                     hourJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(11, 13);
                     if (todaym.substring(0, 10).equals(dateJson) && (today1.substring(11,13).equals(hourJson))) {
-                        Log.i("VALORI: ", today1.substring(11,13).concat(" ").concat(hourJson).concat(" ").concat(dateJson).concat(" ").concat(today1).concat(" ").concat(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName")));
+                        //Log.i("VALORI: ", today1.substring(11,13).concat(" ").concat(hourJson).concat(" ").concat(dateJson).concat(" ").concat(today1).concat(" ").concat(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName")));
                         temp = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature");
                         hum = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity");
                         wPow = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed");
@@ -124,9 +124,8 @@ public class MainActivity extends AppCompatActivity {
             txtDate.setText(todaymN.substring(0, 10));
 
             txtTemp.setText(String.format("%.1f", tt).concat(" °C"));
-            txtHum.setText(hum.concat(" %"));
+            if (hum != null) txtHum.setText(hum.concat(" %"));
             txtWPow.setText(String.format("%.1f", wp).concat(" Km/h"));
-            //Log.e("Error wDir:", "" + Double.parseDouble(wDir));
             if (wDir != null) txtWDir.setText(windDirection((int) Double.parseDouble(wDir)));
             if (clouds != null) txtClouds.setText(clouds.concat(" %"));
             //Log.i(phenomenon, "phen1 :");
