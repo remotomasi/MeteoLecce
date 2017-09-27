@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     String todaymN = sdfmN.format(date);
     ImageView imgIco = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
