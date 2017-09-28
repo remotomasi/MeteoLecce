@@ -3,7 +3,10 @@ package com.meteolecce.meteolecce;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +17,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -112,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+
             Double tt = null;
             Double wp = null;
             if (temp!= null) tt = Double.parseDouble(temp);
@@ -136,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 imgIco.setVisibility(View.INVISIBLE);
             }
+
             super.onPostExecute(result);
         }
     }
@@ -306,6 +315,17 @@ public class MainActivity extends AppCompatActivity {
             case "Mist":
                 imgV.setImageResource(R.drawable.fog);
                 break;
+        }
+    }
+
+    public void openBrowserMetCheck(View view){
+
+        //Get url from tag
+        String url = (String)view.getTag();
+        try {
+            startActivity(new Intent("android.intent.action.VIEW", Uri.parse(url)));
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
