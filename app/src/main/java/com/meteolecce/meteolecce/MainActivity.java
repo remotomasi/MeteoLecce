@@ -17,11 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -318,6 +314,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Open MetCheck page clicking on the image
+     * @param view
+     */
     public void openBrowserMetCheck(View view){
 
         //Get url from tag
