@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat sdfmN = new SimpleDateFormat("dd/MM/yyyy");
     String today = sdf.format(date);
-    long ltime = date.getTime() - 1*60*60*1000; // subtract an hour or two hours for UTC time
+    long ltime = date.getTime(); // - 1*60*60*1000; // subtract an hour or two hours for UTC time
     String today1 = sdf.format(ltime);
     String todaym = sdfm.format(ltime);
     String todaymN = sdfmN.format(date);
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             }
             //tt = tt - 273.15;*/
 
-            txtDate.setText(todaymN.substring(0, 10));
+            txtDate.setText("Ultimo aggiornamento ".concat(today1.substring(11, 16)));
 
             txtTemp.setText(String.format("%.1f", tt).concat(" °C"));
             if (hum != null) txtHum.setText(hum.concat(" %"));
