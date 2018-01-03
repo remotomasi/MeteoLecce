@@ -190,7 +190,7 @@ public class weather3forecast extends AppCompatActivity {
 
             String today32 = sdf3.format(ltime2);
             day2.setText(today32);
-            txtTemp3d_2.setText(Integer.toString(tempd2min).concat("/").concat(Integer.toString(tempd2max)));
+            txtTemp3d_2.setText(Integer.toString(tempd2min).concat("/").concat(Integer.toString(tempd2max)).concat(" °C"));
             if (hum3d_2 != null) txtHum3d_2.setText(hum3d_2.concat(" %"));
             if (phenomenon21 != null) {
                 imgIco21.setVisibility(View.VISIBLE);
@@ -219,7 +219,7 @@ public class weather3forecast extends AppCompatActivity {
 
             String today33 = sdf3.format(ltime3);
             day3.setText(today33);
-            txtTemp3d_3.setText(Integer.toString(tempd3min).concat("/").concat(Integer.toString(tempd3max)));
+            txtTemp3d_3.setText(Integer.toString(tempd3min).concat("/").concat(Integer.toString(tempd3max)).concat(" °C"));
             if (hum3d_3 != null) txtHum3d_3.setText(hum3d_3.concat(" %"));
             if (phenomenon31 != null) {
                 imgIco31.setVisibility(View.VISIBLE);
