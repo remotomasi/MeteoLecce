@@ -1,6 +1,8 @@
 package com.meteolecce.meteolecce;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -303,6 +305,21 @@ public class weather3forecast extends AppCompatActivity {
             case "Mist or Fog":
                 imgV.setImageResource(R.drawable.fog);
                 break;
+        }
+    }
+
+    /**
+     * Open MetCheck page clicking on the image
+     * @param view
+     */
+    public void openBrowserMetCheck(View view){
+
+        //Get url from tag
+        String url = (String)view.getTag();
+        try {
+            startActivity(new Intent("android.intent.action.VIEW", Uri.parse(url)));
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

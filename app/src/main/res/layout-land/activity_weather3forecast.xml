@@ -345,4 +345,17 @@
         app:layout_constraintRight_toLeftOf="@+id/button4"
         android:layout_marginRight="0dp" />
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="100dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="72dp"
+        android:layout_marginRight="24dp"
+        android:contentDescription="@string/logoMetcheckIcon"
+        android:onClick="openBrowserMetCheck"
+        android:tag="https://www.metcheck.com/OTHER/ghx_global_hybrid_model.asp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/metcheck" />
+
 </android.support.constraint.ConstraintLayout>
