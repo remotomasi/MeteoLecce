@@ -133,7 +133,7 @@ public class weather3forecast extends AppCompatActivity {
                     }
                     if (today3.equals(dateJson)) {
                         tmpTemp = Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("temperature"));
-                        Log.i(Integer.toString(tmpTemp).concat(" ").concat(Integer.toString(tempd3max-20)), "tmpTemp3: ");
+                        //Log.i(Integer.toString(tmpTemp).concat(" ").concat(Integer.toString(tempd3max-20)), "tmpTemp3: ");
                         if ((tmpTemp > tempd3max)) tempd3max = tmpTemp;
                         if ((tmpTemp < tempd3min) && (tmpTemp > (tempd3max-20))) tempd3min = tmpTemp;
                         hum3 = hum3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
@@ -272,7 +272,7 @@ public class weather3forecast extends AppCompatActivity {
 
         switch (value) {
             case "Sunny":
-                Log.i(value, "imgV: ");
+                //Log.i(value, "imgV: ");
                 imgV.setImageResource(R.drawable.sun);
                 break;
             case "Fair":

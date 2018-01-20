@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'meteoleccekey'
+            keyPassword 'SmD3kLp'
+            storeFile file('/media/Dati/projects/MeteoLecce/keystore/meteolecce.jks')
+            storePassword 'd9N2nhB'
+        }
+    }
     compileSdkVersion 25
     defaultConfig {
         applicationId "com.meteolecce.meteolecce"
@@ -14,6 +22,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+        }
+        debug {
+            debuggable false
         }
     }
     packagingOptions {
@@ -23,6 +35,7 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
     }
+    buildToolsVersion '25.0.1'
 }
 
 dependencies {
