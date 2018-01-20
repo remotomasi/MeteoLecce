@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             txtPhenomen = null;
     String temp = null, press = null, hum = null, wPow = null, wDir = null, clouds = null, phenomenon = null,
             dateJson = null, hourJson = null;
-    final String site = "http://api.openweathermap.org/data/2.5/weather?q=Lecce,it&appid=35222ccfcb5285d12e8a0e3222d59d9c";
+    // 1final String site = "http://api.openweathermap.org/data/2.5/weather?q=Lecce,it&appid=35222ccfcb5285d12e8a0e3222d59d9c";
     final String metcheck = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
     Date date = Calendar.getInstance().getTime();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss"); // hh:mm:ss
