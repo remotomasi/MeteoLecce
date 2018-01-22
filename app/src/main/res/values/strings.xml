@@ -34,4 +34,7 @@
     <string name="urlMetCheck">www.metcheck.com/IMAGES/LOGOS/ghx_poweredby.png</string>
     <string name="mainWeatheriIcon">Icon that contains actual weather condition</string>
     <string name="logoMetcheckIcon">metcheck logo</string>
+    <string name="wind3d_2" />
+    <string name="wind3d_3" />
+    <string name="wind3d_1" />
 </resources>

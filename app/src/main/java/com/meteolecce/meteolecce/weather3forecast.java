@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,13 +25,16 @@ import java.util.Date;
 public class weather3forecast extends AppCompatActivity {
 
     TextView txtTemp3d_1 = null, txtHum3d_1 = null, day1 = null, day2 = null, day3 = null,
-            txtTemp3d_2 = null, txtHum3d_2 = null, txtTemp3d_3 = null, txtHum3d_3 = null;
+            txtTemp3d_2 = null, txtHum3d_2 = null, txtTemp3d_3 = null, txtHum3d_3 = null,
+            txtWind3d_1 = null, txtWind3d_2 = null, txtWind3d_3 = null;
     int len = 0, temp1 = 0, temp2 = 0, temp3 = 0, tmpTemp = 0,
         tempd1max = -99, tempd1min = 99, tempd2max = -99, tempd2min = 99, tempd3max = -99, tempd3min = 99;
     int hum1 = 0, hum2 = 0, hum3 = 0;
+    int wind1 = 0, wind2 = 0, wind3 = 0;
     String temp3d_1 = null, hum3d_1 = null, dateJson = null, hourJson = null,
             temp3d_2 = null, hum3d_2 = null,
             temp3d_3 = null, hum3d_3 = null,
+            wind3d_3 = null, wind3d_2 = null, wind3d_1 = null,
             phenomenon11 = null, phenomenon12 = null, phenomenon13 = null, phenomenon14 = null,
             phenomenon21 = null, phenomenon22 = null, phenomenon23 = null, phenomenon24 = null,
             phenomenon31 = null, phenomenon32 = null, phenomenon33 = null, phenomenon34 = null;
@@ -65,12 +67,15 @@ public class weather3forecast extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             day1 = (TextView) findViewById(R.id.textView21);
             txtTemp3d_1 = (TextView) findViewById(R.id.textView18);
+            txtWind3d_1 = (TextView) findViewById(R.id.textView);
             txtHum3d_1 = (TextView) findViewById(R.id.textView19);
             day2 = (TextView) findViewById(R.id.textView22);
             txtTemp3d_2 = (TextView) findViewById(R.id.textView24);
-            txtHum3d_2 = (TextView) findViewById(R.id.textView28);
+            txtWind3d_2 = (TextView) findViewById(R.id.textView9);
+            txtHum3d_2 = (TextView) findViewById(R.id.textView41);
             day3 = (TextView) findViewById(R.id.textView29);
             txtTemp3d_3 = (TextView) findViewById(R.id.textView31);
+            txtWind3d_3 = (TextView) findViewById(R.id.textView25);
             txtHum3d_3 = (TextView) findViewById(R.id.textView33);
             imgIco11 = (ImageView) findViewById(R.id.imageViewIcon);
             imgIco12 = (ImageView) findViewById(R.id.imageViewIcon12);
@@ -108,6 +113,7 @@ public class weather3forecast extends AppCompatActivity {
                 dateJson = null;
                 temp1 = temp2 = temp3 = 0;
                 hum1 = hum2 = hum3 = 0;
+                wind1 = hum2 = hum3 = 0;
                 for (int i = 0; i < 130; i++) {
                     dateJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(0,10);
                     hourJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(11,13);
@@ -116,6 +122,7 @@ public class weather3forecast extends AppCompatActivity {
                         if (tmpTemp > tempd1max) tempd1max = tmpTemp;
                         if ((tmpTemp < tempd1min) && (tmpTemp > (tempd1max-20))) tempd1min = tmpTemp;
                         hum1 = hum1 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
+                        wind1 = wind1 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection"));
                         if (hourJson.equals("00")) phenomenon11 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                         if (hourJson.equals("06")) phenomenon12 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                         if (hourJson.equals("15")) phenomenon13 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
@@ -148,6 +155,9 @@ public class weather3forecast extends AppCompatActivity {
                 hum3d_1 = "" + hum1/24;
                 hum3d_2 = "" + hum2/24;
                 hum3d_3 = "" + hum3/24;
+                wind3d_1 = "" + wind1/24;
+                wind3d_2 = "" + wind2/24;
+                wind3d_3 = "" + wind3/24;
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -164,6 +174,7 @@ public class weather3forecast extends AppCompatActivity {
             String today31 = sdf3.format(ltime1);
             day1.setText(today31);
             txtTemp3d_1.setText(Integer.toString(tempd1min).concat("/").concat(Integer.toString(tempd1max)).concat(" °C"));
+            txtWind3d_1.setText(windDirection((int) Double.parseDouble(wind3d_1)));
             if (hum3d_1 != null) txtHum3d_1.setText(hum3d_1.concat(" %"));
             if (phenomenon11 != null) {
                 imgIco11.setVisibility(View.VISIBLE);
@@ -193,6 +204,7 @@ public class weather3forecast extends AppCompatActivity {
             String today32 = sdf3.format(ltime2);
             day2.setText(today32);
             txtTemp3d_2.setText(Integer.toString(tempd2min).concat("/").concat(Integer.toString(tempd2max)).concat(" °C"));
+            txtWind3d_2.setText(windDirection((int) Double.parseDouble(wind3d_2)));
             if (hum3d_2 != null) txtHum3d_2.setText(hum3d_2.concat(" %"));
             if (phenomenon21 != null) {
                 imgIco21.setVisibility(View.VISIBLE);
@@ -222,6 +234,7 @@ public class weather3forecast extends AppCompatActivity {
             String today33 = sdf3.format(ltime3);
             day3.setText(today33);
             txtTemp3d_3.setText(Integer.toString(tempd3min).concat("/").concat(Integer.toString(tempd3max)).concat(" °C"));
+            txtWind3d_3.setText(windDirection((int) Double.parseDouble(wind3d_3)));
             if (hum3d_3 != null) txtHum3d_3.setText(hum3d_3.concat(" %"));
             if (phenomenon31 != null) {
                 imgIco31.setVisibility(View.VISIBLE);
@@ -306,6 +319,33 @@ public class weather3forecast extends AppCompatActivity {
                 imgV.setImageResource(R.drawable.fog);
                 break;
         }
+    }
+
+    /**
+     * Convert degree in a human comprehensible thing
+     */
+    public String windDirection(int deg) {
+        String dir = null;
+
+        if (deg > 335 || deg <= 25) {
+            dir = "Nord";
+        } else if (deg > 25 && deg <= 65) {
+            dir = "Nord-Est";
+        } else if (deg > 65 && deg <= 155) {
+            dir = "Est";
+        } else if (deg > 115 && deg <= 155) {
+            dir = "Sud-Est";
+        } else if (deg > 155 && deg <= 205) {
+            dir = "Sud";
+        } else if (deg > 205 && deg <= 245) {
+            dir = "Sud-Ovest";
+        } else if (deg > 245 && deg <= 295) {
+            dir = "Ovest";
+        } else if (deg > 295 && deg <= 335) {
+            dir = "Nord-Ovest";
+        }
+
+        return dir;
     }
 
     /**

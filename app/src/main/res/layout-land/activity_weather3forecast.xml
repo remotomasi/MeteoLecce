@@ -21,25 +21,22 @@
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="110dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/tempNameMinMax"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
     <TextView
         android:id="@+id/textView17"
-        android:layout_width="110dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:text="@string/humName"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
         android:id="@+id/button4"
@@ -55,30 +52,27 @@
 
     <TextView
         android:id="@+id/textView18"
-        android:layout_width="60dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginStart="16dp"
         android:text="@string/temperature3d_1"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView16"
         app:layout_constraintLeft_toRightOf="@+id/textView16" />
 
     <TextView
         android:id="@+id/textView19"
-        android:layout_width="60dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:text="@string/humidity3d_1"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView17"
-        app:layout_constraintLeft_toRightOf="@+id/textView17" />
+        app:layout_constraintStart_toEndOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView21"
-        android:layout_width="259dp"
+        android:layout_width="258dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/holo_green_dark"
         android:text="@string/firstDay"
@@ -105,49 +99,36 @@
 
     <TextView
         android:id="@+id/textView23"
-        android:layout_width="110dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="118dp"
+        android:layout_marginStart="127dp"
         android:text="@string/tempNameMinMax"
-        app:layout_constraintLeft_toRightOf="@+id/textView18"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView18" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView18"
+        app:layout_constraintStart_toEndOf="@+id/textView18" />
 
     <TextView
         android:id="@+id/textView24"
-        android:layout_width="60dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:text="@string/temperature3d_2"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView23"
-        app:layout_constraintLeft_toRightOf="@+id/textView23" />
+        app:layout_constraintStart_toEndOf="@+id/textView23" />
 
     <TextView
         android:id="@+id/textView27"
-        android:layout_width="110dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="118dp"
+        android:layout_marginStart="127dp"
         android:text="@string/humName"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView19"
-        app:layout_constraintLeft_toRightOf="@+id/textView19" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:text="@string/humidity3d_2"
-        android:visibility="invisible"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView27"
-        app:layout_constraintLeft_toRightOf="@+id/textView27" />
+        app:layout_constraintStart_toEndOf="@+id/textView19" />
 
     <TextView
         android:id="@+id/textView29"
-        android:layout_width="259dp"
+        android:layout_width="258dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/holo_green_dark"
         android:text="@string/thirdDay"
@@ -159,57 +140,52 @@
 
     <TextView
         android:id="@+id/textView30"
-        android:layout_width="110dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/tempNameMinMax"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
     <TextView
         android:id="@+id/textView31"
-        android:layout_width="60dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:text="@string/temperature3d_3"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView30"
-        app:layout_constraintLeft_toRightOf="@+id/textView30" />
+        app:layout_constraintStart_toEndOf="@+id/textView30" />
 
     <TextView
         android:id="@+id/textView32"
-        android:layout_width="110dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:text="@string/humName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30"
+        app:layout_constraintTop_toBottomOf="@+id/textView37"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView33"
-        android:layout_width="60dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:text="@string/humidity3d_3"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView32"
-        app:layout_constraintLeft_toRightOf="@+id/textView32" />
+        app:layout_constraintStart_toEndOf="@+id/textView32" />
 
     <ImageView
         android:id="@+id/imageViewIcon"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="9dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:visibility="invisible"
-        app:layout_constraintLeft_toRightOf="@+id/textView18"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
         app:layout_constraintTop_toBottomOf="@+id/textView21"
         app:srcCompat="@drawable/sun" />
 
@@ -217,10 +193,9 @@
         android:id="@+id/imageViewIcon13"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="9dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="16dp"
         android:visibility="invisible"
-        app:layout_constraintLeft_toRightOf="@+id/textView19"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/imageViewIcon"
         app:srcCompat="@drawable/sun" />
 
@@ -261,10 +236,10 @@
         android:id="@+id/imageViewIcon3"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="9dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:visibility="invisible"
-        app:layout_constraintLeft_toRightOf="@+id/textView31"
+        app:layout_constraintStart_toEndOf="@+id/textView31"
         app:layout_constraintTop_toBottomOf="@+id/textView29"
         app:srcCompat="@drawable/sun" />
 
@@ -283,10 +258,9 @@
         android:id="@+id/imageViewIcon33"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="9dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="16dp"
         android:visibility="invisible"
-        app:layout_constraintLeft_toRightOf="@+id/textView33"
+        app:layout_constraintStart_toEndOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/imageViewIcon3"
         app:srcCompat="@drawable/sun" />
 
@@ -305,10 +279,10 @@
         android:id="@+id/imageViewIcon2"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="9dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:visibility="invisible"
-        app:layout_constraintLeft_toRightOf="@+id/textView24"
+        app:layout_constraintStart_toEndOf="@+id/textView24"
         app:layout_constraintTop_toBottomOf="@+id/textView22"
         app:srcCompat="@drawable/sun" />
 
@@ -327,10 +301,9 @@
         android:id="@+id/imageViewIcon23"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginLeft="9dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="16dp"
         android:visibility="invisible"
-        app:layout_constraintLeft_toRightOf="@+id/textView28"
+        app:layout_constraintStart_toEndOf="@+id/textView41"
         app:layout_constraintTop_toBottomOf="@+id/imageViewIcon2"
         app:srcCompat="@drawable/sun" />
 
@@ -350,12 +323,78 @@
         android:layout_width="100dp"
         android:layout_height="43dp"
         android:layout_marginBottom="72dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginEnd="16dp"
         android:contentDescription="@string/logoMetcheckIcon"
         android:onClick="openBrowserMetCheck"
         android:tag="https://www.metcheck.com/OTHER/ghx_global_hybrid_model.asp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/metcheck" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/windName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/wind3d_1"
+        android:textSize="13sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/windName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/wind3d_2"
+        android:textSize="13sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView37"
+        app:layout_constraintStart_toEndOf="@+id/textView37" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="127dp"
+        android:text="@string/windName"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/wind3d_3"
+        android:textSize="13sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView39"
+        app:layout_constraintStart_toEndOf="@+id/textView39" />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/humidity3d_2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView27"
+        app:layout_constraintStart_toEndOf="@+id/textView27" />
 
 </android.support.constraint.ConstraintLayout>
