@@ -29,7 +29,8 @@ import org.apache.http.util.EntityUtils;
 import org.apache.http.client.ClientProtocolException;
 
 
-public class MainActivity extends AppCompatActivity {
+public class
+MainActivity extends AppCompatActivity {
 
     TextView txtDate = null, txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null, txtClouds = null,
             txtPhenomen = null;
@@ -268,15 +269,31 @@ public class MainActivity extends AppCompatActivity {
      */
     public void skyIcon(String value, ImageView imgV) {
 
+        Date date = Calendar.getInstance().getTime();
+        long htime = date.getTime();
+        String hsunset = sdf.format(htime).substring(11, 13);
+
         switch (value) {
             case "Sunny":
-                imgV.setImageResource(R.drawable.sun);
+                if (Integer.parseInt(hsunset) < 18) {
+                    imgV.setImageResource(R.drawable.sun);
+                }else {
+                    imgV.setImageResource(R.drawable.moon);
+                }
                 break;
             case "Fair":
-                imgV.setImageResource(R.drawable.few_clouds);
+                if (Integer.parseInt(hsunset) < 18) {
+                    imgV.setImageResource(R.drawable.few_clouds);
+                }else {
+                    imgV.setImageResource(R.drawable.moon_fewclouds);
+                }
                 break;
             case "Partly Cloudy":
-                imgV.setImageResource(R.drawable.partly_cloudy);
+                if (Integer.parseInt(hsunset) < 18) {
+                    imgV.setImageResource(R.drawable.partly_cloudy);
+                }else {
+                    imgV.setImageResource(R.drawable.moon_cloudy);
+                }
                 break;
             case "Cloudy":
                 imgV.setImageResource(R.drawable.cloudy);

@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class weather3forecast extends AppCompatActivity {
@@ -178,25 +179,25 @@ public class weather3forecast extends AppCompatActivity {
             if (hum3d_1 != null) txtHum3d_1.setText(hum3d_1.concat(" %"));
             if (phenomenon11 != null) {
                 imgIco11.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon11, imgIco11);
+                skyIcon(phenomenon11, imgIco11, 0);
             } else {
                 imgIco11.setVisibility(View.INVISIBLE);
             }
             if (phenomenon12 != null) {
                 imgIco12.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon12, imgIco12);
+                skyIcon(phenomenon12, imgIco12, 6);
             } else {
                 imgIco12.setVisibility(View.INVISIBLE);
             }
             if (phenomenon13 != null) {
                 imgIco13.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon13, imgIco13);
+                skyIcon(phenomenon13, imgIco13, 12);
             } else {
                 imgIco13.setVisibility(View.INVISIBLE);
             }
             if (phenomenon14 != null) {
                 imgIco14.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon14, imgIco14);
+                skyIcon(phenomenon14, imgIco14, 18);
             } else {
                 imgIco14.setVisibility(View.INVISIBLE);
             }
@@ -208,25 +209,25 @@ public class weather3forecast extends AppCompatActivity {
             if (hum3d_2 != null) txtHum3d_2.setText(hum3d_2.concat(" %"));
             if (phenomenon21 != null) {
                 imgIco21.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon21, imgIco21);
+                skyIcon(phenomenon21, imgIco21, 0);
             } else {
                 imgIco21.setVisibility(View.INVISIBLE);
             }
             if (phenomenon22 != null) {
                 imgIco22.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon22, imgIco22);
+                skyIcon(phenomenon22, imgIco22, 6);
             } else {
                 imgIco22.setVisibility(View.INVISIBLE);
             }
             if (phenomenon23 != null) {
                 imgIco23.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon23, imgIco23);
+                skyIcon(phenomenon23, imgIco23, 12);
             } else {
                 imgIco23.setVisibility(View.INVISIBLE);
             }
             if (phenomenon24 != null) {
                 imgIco24.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon24, imgIco24);
+                skyIcon(phenomenon24, imgIco24, 18);
             } else {
                 imgIco24.setVisibility(View.INVISIBLE);
             }
@@ -238,25 +239,25 @@ public class weather3forecast extends AppCompatActivity {
             if (hum3d_3 != null) txtHum3d_3.setText(hum3d_3.concat(" %"));
             if (phenomenon31 != null) {
                 imgIco31.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon31, imgIco31);
+                skyIcon(phenomenon31, imgIco31, 0);
             } else {
                 imgIco31.setVisibility(View.INVISIBLE);
             }
             if (phenomenon32 != null) {
                 imgIco32.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon32, imgIco32);
+                skyIcon(phenomenon32, imgIco32, 6);
             } else {
                 imgIco32.setVisibility(View.INVISIBLE);
             }
             if (phenomenon33 != null) {
                 imgIco33.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon33, imgIco33);
+                skyIcon(phenomenon33, imgIco33, 12);
             } else {
                 imgIco33.setVisibility(View.INVISIBLE);
             }
             if (phenomenon34 != null) {
                 imgIco34.setVisibility(View.VISIBLE);
-                skyIcon(phenomenon34, imgIco34);
+                skyIcon(phenomenon34, imgIco34, 18);
             } else {
                 imgIco34.setVisibility(View.INVISIBLE);
             }
@@ -281,20 +282,36 @@ public class weather3forecast extends AppCompatActivity {
     }
 
     /** Obtain icon */
-    public void skyIcon(String value, ImageView imgV) {
+    public void skyIcon(String value, ImageView imgV, int hour) {
+
+/*        Date date = Calendar.getInstance().getTime();
+        long htime = date.getTime();
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss");
+        String hsunset = sdf2.format(htime).substring(11, 13);*/
 
         switch (value) {
             case "Sunny":
-                //Log.i(value, "imgV: ");
-                imgV.setImageResource(R.drawable.sun);
+                if (hour < 18) {
+                    imgV.setImageResource(R.drawable.sun);
+                }else {
+                    imgV.setImageResource(R.drawable.moon);
+                }
                 break;
             case "Fair":
             case "Mainly Clear":
-                imgV.setImageResource(R.drawable.few_clouds);
+                if (hour < 18) {
+                    imgV.setImageResource(R.drawable.few_clouds);
+                }else {
+                    imgV.setImageResource(R.drawable.moon_fewclouds);
+                }
                 break;
             case "Scattered Clouds":
             case "Partly Cloudy":
-                imgV.setImageResource(R.drawable.partly_cloudy);
+                if (hour < 18) {
+                    imgV.setImageResource(R.drawable.partly_cloudy);
+                }else {
+                    imgV.setImageResource(R.drawable.moon_cloudy);
+                }
                 break;
             case "Cloudy":
                 imgV.setImageResource(R.drawable.cloudy);
