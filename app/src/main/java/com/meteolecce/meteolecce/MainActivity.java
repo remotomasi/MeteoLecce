@@ -34,7 +34,7 @@ MainActivity extends AppCompatActivity {
 
     TextView txtDate = null, txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null, txtClouds = null,
             txtPhenomen = null;
-    String temp = null, press = null, hum = null, wPow = null, wDir = null, clouds = null, phenomenon = null,
+    String temp = null, press = null, hum = null, wPow = null, wDir = null, clouds = null, phenomenon = null, phNext = null,
             dateJson = null, hourJson = null;
     // 1final String site = "http://api.openweathermap.org/data/2.5/weather?q=Lecce,it&appid=35222ccfcb5285d12e8a0e3222d59d9c";
     final String metcheck = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
@@ -48,6 +48,7 @@ MainActivity extends AppCompatActivity {
     String todaym = sdfm.format(ltime);
     String todaymN = sdfmN.format(date);
     ImageView imgIco = null;
+    ImageView imgNext = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ MainActivity extends AppCompatActivity {
             txtClouds = (TextView) findViewById(R.id.textView13);
             txtPhenomen = (TextView) findViewById(R.id.textView14);
             imgIco = (ImageView) findViewById(R.id.imageViewIcon);
+            imgNext = (ImageView) findViewById(R.id.imageView7);
 
             String str = "";
             HttpResponse response;
@@ -99,13 +101,14 @@ MainActivity extends AppCompatActivity {
                         wDir = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection");
                         clouds = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("totalcloud");
                         phenomenon = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
-        /*
-                        if (json.getJSONObject("wind").has("deg"))
-                            wDir = json.getJSONObject("wind").getString("deg");
-                        if (json.getJSONObject("clouds").has("all"))
-                            clouds = json.getJSONObject("clouds").getString("all");
-                        if (json.getJSONArray("weather").getJSONObject(0).has("description"))
-                            phenomenon = "" + json.getJSONArray("weather").getJSONObject(0).getString("description");*/
+
+                        if (i < 21)         // 3 hours from now
+                            i = i + 3;
+                        else
+                            i = 23;
+
+                        phNext = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i+3).getString("iconName");
+
                     }
                 }
             } catch (JSONException e) {
@@ -140,6 +143,13 @@ MainActivity extends AppCompatActivity {
                 skyIcon(phenomenon, imgIco);
             } else {
                 imgIco.setVisibility(View.INVISIBLE);
+            }
+
+            if (phNext != null) {
+                imgNext.setVisibility(View.VISIBLE);
+                skyIcon(phNext, imgNext);
+            } else {
+                imgNext.setVisibility(View.INVISIBLE);
             }
 
             super.onPostExecute(result);
@@ -191,7 +201,7 @@ MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Translation
+     * Translation weather strings
      */
     public String skyConversion(String value) {
         String sky = null;
@@ -265,7 +275,7 @@ MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Convert degree in a human comprehensible thing
+     * Convert string to an icon
      */
     public void skyIcon(String value, ImageView imgV) {
 
