@@ -284,11 +284,6 @@ public class weather3forecast extends AppCompatActivity {
     /** Obtain icon */
     public void skyIcon(String value, ImageView imgV, int hour) {
 
-/*        Date date = Calendar.getInstance().getTime();
-        long htime = date.getTime();
-        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss");
-        String hsunset = sdf2.format(htime).substring(11, 13);*/
-
         switch (value) {
             case "Sunny":
                 if (hour < 18) {
