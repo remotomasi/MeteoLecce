@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.renderscript.Double4;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import android.util.Log;
+
+import java.lang.*;
 
 public class weather3forecast extends AppCompatActivity {
 
@@ -123,7 +127,7 @@ public class weather3forecast extends AppCompatActivity {
                         if (tmpTemp > tempd1max) tempd1max = tmpTemp;
                         if ((tmpTemp < tempd1min) && (tmpTemp > (tempd1max-20))) tempd1min = tmpTemp;
                         hum1 = hum1 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
-                        wind1 = (wind1 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")))/2;
+                        wind1 = windDir(Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i -1).getString("windspeed")), wind1, Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed")), Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")));
                         if (hourJson.equals("00")) phenomenon11 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                         if (hourJson.equals("06")) phenomenon12 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                         if (hourJson.equals("15")) phenomenon13 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
@@ -134,7 +138,8 @@ public class weather3forecast extends AppCompatActivity {
                         if (tmpTemp > tempd2max) tempd2max = tmpTemp;
                         if ((tmpTemp < tempd2min) && (tmpTemp > (tempd2max-20))) tempd2min = tmpTemp;
                         hum2 = hum2 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
-                        wind2 = (wind2 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")))/2;
+                        //wind2 = (wind2 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")))/2;
+                        wind2 = windDir(Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i - 1).getString("windspeed")), wind2, Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed")), Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")));
                         if (hourJson.equals("00")) phenomenon21 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                         if (hourJson.equals("06")) phenomenon22 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                         if (hourJson.equals("12")) phenomenon23 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
@@ -146,7 +151,9 @@ public class weather3forecast extends AppCompatActivity {
                         if ((tmpTemp > tempd3max)) tempd3max = tmpTemp;
                         if ((tmpTemp < tempd3min) && (tmpTemp > (tempd3max-20))) tempd3min = tmpTemp;
                         hum3 = hum3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
-                        wind3 = (wind3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")))/2;
+                        //wind3 = (wind3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")))/2;
+                        wind3 = windDir(Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i - 1).getString("windspeed")), wind3, Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed")), Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")));
+                        //Log.i("" + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed")) + " " + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")), "AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                         if (hourJson.equals("00")) phenomenon31 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                         if (hourJson.equals("06")) phenomenon32 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                         if (hourJson.equals("12")) phenomenon33 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
@@ -360,6 +367,31 @@ public class weather3forecast extends AppCompatActivity {
         }
 
         return dir;
+    }
+
+    /**
+     * Calculate wind direction by summing vector directions
+     */
+    public int windDir(double mod1, int angle1, double mod2, int angle2) {
+
+        double x = 0, y = 0;
+        int finalDir = 0;
+
+        // convert them to radians
+        x = Math.toRadians(angle1);
+        y = Math.toRadians(angle2);
+
+        finalDir = (int) Math.toDegrees(Math.atan((mod1 * Math.sin(x) + mod2 * Math.sin(y))/(mod1 * Math.cos(x) + mod2 * Math.cos(y))));
+
+        // Based on the value of the arctangent
+        if (Math.cos(x) > 0 && Math.sin(x) < 0 && Math.cos(y) > 0 && Math.sin(y) < 0) finalDir += 360;
+        if (Math.cos(x) > 0 && Math.sin(x) < 0 && Math.cos(y) < 0 && Math.sin(y) < 0) finalDir += 180;
+        if (Math.cos(x) < 0 && Math.sin(x) < 0 && Math.cos(y) < 0 && Math.sin(y) < 0) finalDir += 180;
+        if (Math.cos(x) < 0 && Math.sin(x) < 0 && Math.cos(y) < 0 && Math.sin(y) > 0) finalDir += 180;
+        if (Math.cos(x) < 0 && Math.sin(x) > 0 && Math.cos(y) < 0 && Math.sin(y) > 0) finalDir += 180;
+        if (Math.cos(x) < 0 && Math.sin(x) > 0 && Math.cos(y) < 0 && Math.sin(y) < 0) finalDir += 180;
+
+        return finalDir;
     }
 
     /**

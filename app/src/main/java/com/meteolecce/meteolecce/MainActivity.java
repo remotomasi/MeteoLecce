@@ -285,21 +285,21 @@ MainActivity extends AppCompatActivity {
 
         switch (value) {
             case "Sunny":
-                if (Integer.parseInt(hsunset) < 18) {
+                if (Integer.parseInt(hsunset) < 18 && Integer.parseInt(hsunset) > 6) {
                     imgV.setImageResource(R.drawable.sun);
                 }else {
                     imgV.setImageResource(R.drawable.moon);
                 }
                 break;
             case "Fair":
-                if (Integer.parseInt(hsunset) < 18) {
+                if (Integer.parseInt(hsunset) < 18 && Integer.parseInt(hsunset) > 6) {
                     imgV.setImageResource(R.drawable.few_clouds);
                 }else {
                     imgV.setImageResource(R.drawable.moon_fewclouds);
                 }
                 break;
             case "Partly Cloudy":
-                if (Integer.parseInt(hsunset) < 18) {
+                if (Integer.parseInt(hsunset) < 18 && Integer.parseInt(hsunset) > 6) {
                     imgV.setImageResource(R.drawable.partly_cloudy);
                 }else {
                     imgV.setImageResource(R.drawable.moon_cloudy);
