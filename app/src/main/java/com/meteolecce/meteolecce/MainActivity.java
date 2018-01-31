@@ -35,9 +35,10 @@ MainActivity extends AppCompatActivity {
     TextView txtDate = null, txtTemp = null, txtPress = null, txtHum = null, txtWPow = null, txtWDir = null, txtClouds = null,
             txtPhenomen = null;
     String temp = null, press = null, hum = null, wPow = null, wDir = null, clouds = null, phenomenon = null, phNext = null,
-            dateJson = null, hourJson = null;
+            dp = null, dateJson = null, hourJson = null;
+    Double fogVis = 0.0;
     // 1final String site = "http://api.openweathermap.org/data/2.5/weather?q=Lecce,it&appid=35222ccfcb5285d12e8a0e3222d59d9c";
-    final String metcheck = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553";
+    final String metcheck = "http://ws1.metcheck.com/ENGINE/v9_0/json.asp?lat=40.4&lon=18.2&lid=22553"; // metcheck json site
     Date date = Calendar.getInstance().getTime();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss"); // hh:mm:ss
     SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-MM-dd");
@@ -47,8 +48,7 @@ MainActivity extends AppCompatActivity {
     String today1 = sdf.format(ltime);
     String todaym = sdfm.format(ltime);
     String todaymN = sdfmN.format(date);
-    ImageView imgIco = null;
-    ImageView imgNext = null;
+    ImageView imgIco = null, imgNext = null, imgFog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,7 @@ MainActivity extends AppCompatActivity {
             txtPhenomen = (TextView) findViewById(R.id.textView14);
             imgIco = (ImageView) findViewById(R.id.imageViewIcon);
             imgNext = (ImageView) findViewById(R.id.imageView7);
+            imgFog = (ImageView) findViewById(R.id.imageView5);
 
             String str = "";
             HttpResponse response;
@@ -101,13 +102,15 @@ MainActivity extends AppCompatActivity {
                         wDir = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection");
                         clouds = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("totalcloud");
                         phenomenon = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
+                        dp = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("dewpoint");
+                        fogVis = Double.parseDouble(temp) - Double.parseDouble(dp);
 
                         if (i < 21)         // 3 hours from now
                             i = i + 3;
                         else
                             i = 23;
 
-                        phNext = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i+3).getString("iconName");
+                        phNext = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i + 3).getString("iconName");
 
                     }
                 }
@@ -151,6 +154,9 @@ MainActivity extends AppCompatActivity {
             } else {
                 imgNext.setVisibility(View.INVISIBLE);
             }
+
+            if (fogVis < 4.0) imgFog.setVisibility(View.VISIBLE);
+                else imgFog.setVisibility(View.INVISIBLE);
 
             super.onPostExecute(result);
         }
