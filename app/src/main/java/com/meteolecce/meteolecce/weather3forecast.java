@@ -31,7 +31,8 @@ public class weather3forecast extends AppCompatActivity {
 
     TextView txtTemp3d_1 = null, txtHum3d_1 = null, day1 = null, day2 = null, day3 = null,
             txtTemp3d_2 = null, txtHum3d_2 = null, txtTemp3d_3 = null, txtHum3d_3 = null,
-            txtWind3d_1 = null, txtWind3d_2 = null, txtWind3d_3 = null;
+            txtWind3d_1 = null, txtWind3d_2 = null, txtWind3d_3 = null,
+            dayENG1 = null, dayENG2 = null, dayENG3 = null;
     int len = 0, temp1 = 0, temp2 = 0, temp3 = 0, tmpTemp = 0,
         tempd1max = -99, tempd1min = 99, tempd2max = -99, tempd2min = 99, tempd3max = -99, tempd3min = 99;
     int hum1 = 0, hum2 = 0, hum3 = 0;
@@ -193,9 +194,9 @@ public class weather3forecast extends AppCompatActivity {
 
             //Log.e("Error phen:", phenomenon11);
 
-            SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf3 = new SimpleDateFormat("E dd/MM/yyyy");
             String today31 = sdf3.format(ltime1);
-            day1.setText(today31);
+            day1.setText(dayInITA(today31.substring(0,3)).concat(" ").concat(today31.substring(4,14)));
             txtTemp3d_1.setText(Integer.toString(tempd1min).concat("/").concat(Integer.toString(tempd1max)).concat(" °C"));
             txtWind3d_1.setText(windDirection((int) Double.parseDouble(wind3d_1)));
             if (hum3d_1 != null) txtHum3d_1.setText(hum3d_1.concat(" %"));
@@ -227,7 +228,7 @@ public class weather3forecast extends AppCompatActivity {
             }
 
             String today32 = sdf3.format(ltime2);
-            day2.setText(today32);
+            day2.setText(dayInITA(today32.substring(0,3)).concat(" ").concat(today32.substring(4,14)));
             txtTemp3d_2.setText(Integer.toString(tempd2min).concat("/").concat(Integer.toString(tempd2max)).concat(" °C"));
             txtWind3d_2.setText(windDirection((int) Double.parseDouble(wind3d_2)));
             if (hum3d_2 != null) txtHum3d_2.setText(hum3d_2.concat(" %"));
@@ -259,7 +260,7 @@ public class weather3forecast extends AppCompatActivity {
             }
 
             String today33 = sdf3.format(ltime3);
-            day3.setText(today33);
+            day3.setText(dayInITA(today33.substring(0,3)).concat(" ").concat(today33.substring(4,14)));
             txtTemp3d_3.setText(Integer.toString(tempd3min).concat("/").concat(Integer.toString(tempd3max)).concat(" °C"));
             txtWind3d_3.setText(windDirection((int) Double.parseDouble(wind3d_3)));
             if ((((tempd3max + tempd3min)/2) - dp1) < 4.0) imgFog3.setVisibility(View.VISIBLE);
@@ -411,6 +412,31 @@ public class weather3forecast extends AppCompatActivity {
         if (Math.cos(x) < 0 && Math.sin(x) > 0 && Math.cos(y) < 0 && Math.sin(y) < 0) finalDir += 180;
 
         return finalDir;
+    }
+
+    /**
+     * Convert degree in a human comprehensible thing
+     */
+    public String dayInITA(String day) {
+        String dayITA = null;
+
+        if (day.equals("Sun")) {
+            dayITA = "Dom";
+        } else if (day.equals("Mon")) {
+            dayITA = "Lun";
+        } else if (day.equals("Tue")) {
+            dayITA = "Mar";
+        } else if (day.equals("Wed")) {
+            dayITA = "Mer";
+        } else if (day.equals("Thu")) {
+            dayITA = "Gio";
+        } else if (day.equals("Fri")) {
+            dayITA = "Ven";
+        } else if (day.equals("Sat")) {
+            dayITA = "Sab";
+        }
+
+        return dayITA;
     }
 
     /**
