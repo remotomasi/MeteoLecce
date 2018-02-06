@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -229,7 +230,7 @@ public class weather3forecast extends AppCompatActivity {
             txtTemp3d_2.setText(Integer.toString(tempd2min).concat("/").concat(Integer.toString(tempd2max)).concat(" °C"));
             txtWind3d_2.setText(windDirection((int) Double.parseDouble(wind3d_2)));
             if (hum3d_2 != null) txtHum3d_2.setText(hum3d_2.concat(" %"));
-            if ((((tempd2max + tempd2min)/2) - dp1) < 4.0) imgFog2.setVisibility(View.VISIBLE);
+            if ((((tempd2max + tempd2min)/2) - dp2) < 4.0) imgFog2.setVisibility(View.VISIBLE);
             else imgFog2.setVisibility(View.INVISIBLE);
             if (phenomenon21 != null) {
                 imgIco21.setVisibility(View.VISIBLE);
@@ -260,7 +261,7 @@ public class weather3forecast extends AppCompatActivity {
             day3.setText(dayInITA(today33.substring(0,3)).concat(" ").concat(today33.substring(4,14)));
             txtTemp3d_3.setText(Integer.toString(tempd3min).concat("/").concat(Integer.toString(tempd3max)).concat(" °C"));
             txtWind3d_3.setText(windDirection((int) Double.parseDouble(wind3d_3)));
-            if ((((tempd3max + tempd3min)/2) - dp1) < 4.0) imgFog3.setVisibility(View.VISIBLE);
+            if ((((tempd3max + tempd3min)/2) - dp3) < 4.0) imgFog3.setVisibility(View.VISIBLE);
                 else imgFog3.setVisibility(View.INVISIBLE);
             if (hum3d_3 != null) txtHum3d_3.setText(hum3d_3.concat(" %"));
             if (phenomenon31 != null) {
