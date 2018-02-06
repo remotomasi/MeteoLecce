@@ -37,5 +37,5 @@
     <string name="wind3d_2" />
     <string name="wind3d_3" />
     <string name="wind3d_1" />
-    <string name="previstoABreve">Previsto tra qualche ora...</string>
+    <string name="previstoABreve">Previsto tra 3 ore...</string>
 </resources>

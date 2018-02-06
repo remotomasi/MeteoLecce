@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.renderscript.Double4;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,9 +20,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import android.util.Log;
 
 import java.lang.*;
 
@@ -178,7 +175,7 @@ public class weather3forecast extends AppCompatActivity {
                 hum3d_3 = "" + hum3/24;
                 wind3d_1 = "" + wind1; //24;
                 wind3d_2 = "" + wind2; //24;
-                wind3d_3 = "" + wind3; ///24;
+                wind3d_3 = "" + wind3; //24;
                 dp1 = dp1/24;
                 dp2 = dp2/24;
                 dp3 = dp3/24;
