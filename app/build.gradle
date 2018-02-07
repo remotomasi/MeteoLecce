@@ -12,10 +12,10 @@ android {
     compileSdkVersion 25
     defaultConfig {
         applicationId "com.meteolecce.meteolecce"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 23
-        versionCode 7
-        versionName 'MistRealease'
+        versionCode 9
+        versionName 'Temp and Downgrade Release'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
