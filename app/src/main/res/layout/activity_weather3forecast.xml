@@ -53,7 +53,7 @@
 
     <TextView
         android:id="@+id/textView18"
-        android:layout_width="70dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:text="@string/temperature3d_1"
@@ -62,7 +62,7 @@
 
     <TextView
         android:id="@+id/textView19"
-        android:layout_width="70dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:text="@string/humidity3d_1"
@@ -114,7 +114,7 @@
 
     <TextView
         android:id="@+id/textView24"
-        android:layout_width="70dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:text="@string/temperature3d_2"
@@ -158,7 +158,7 @@
 
     <TextView
         android:id="@+id/textView31"
-        android:layout_width="70dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/temperature3d_3"
@@ -176,7 +176,7 @@
 
     <TextView
         android:id="@+id/textView33"
-        android:layout_width="70dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:text="@string/humidity3d_3"
@@ -339,7 +339,7 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="70dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/wind3d_1"
@@ -348,7 +348,7 @@
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="70dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/wind3d_2"
@@ -357,7 +357,7 @@
 
     <TextView
         android:id="@+id/textView25"
-        android:layout_width="70dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/wind3d_3"
@@ -393,7 +393,7 @@
 
     <TextView
         android:id="@+id/textView41"
-        android:layout_width="70dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/humidity3d_2"
@@ -404,7 +404,7 @@
         android:id="@+id/imageView6"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/textView"
@@ -415,7 +415,7 @@
         android:id="@+id/imageView8"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -426,7 +426,7 @@
         android:id="@+id/imageView9"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/textView25"
