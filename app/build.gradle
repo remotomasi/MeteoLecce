@@ -12,10 +12,10 @@ android {
     compileSdkVersion 25
     defaultConfig {
         applicationId "com.meteolecce.meteolecce"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 23
-        versionCode 9
-        versionName 'Temp and Downgrade Release'
+        versionCode 10
+        versionName 'Fog Release'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
