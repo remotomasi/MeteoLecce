@@ -289,6 +289,8 @@ MainActivity extends AppCompatActivity {
         long htime = date.getTime();
         String hsunset = sdf.format(htime).substring(11, 13);
 
+        Log.i(">>>>>>>>>>>>>>>>>>", value);
+
         switch (value) {
             case "Sunny":
                 if (Integer.parseInt(hsunset) < 18 && Integer.parseInt(hsunset) > 6) {
@@ -315,6 +317,9 @@ MainActivity extends AppCompatActivity {
                 imgV.setImageResource(R.drawable.cloudy);
                 break;
             case "Light Rain":
+                imgV.setImageResource(R.drawable.light_rain);
+                break;
+            case "Intermittent Rain":
                 imgV.setImageResource(R.drawable.light_rain);
                 break;
             case "Showers":
