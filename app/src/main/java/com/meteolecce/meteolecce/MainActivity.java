@@ -139,11 +139,18 @@ MainActivity extends AppCompatActivity {
             txtWPow.setText(String.format("%.1f", wp).concat(" Km/h"));
             if (wDir != null) txtWDir.setText(windDirection((int) Double.parseDouble(wDir)));
             if (clouds != null) txtClouds.setText(clouds.concat(" %"));
-            //Log.i(phenomenon, "phen1 :");
+            Log.i(phenomenon, "phen1 :");
             if (phenomenon != null) {
                 imgIco.setVisibility(View.VISIBLE);
                 txtPhenomen.setText(skyConversion(phenomenon));
                 skyIcon(phenomenon, imgIco);
+
+                if (fogVis < 4.0 && (!phenomenon.equals("Rain")
+                        && !phenomenon.equals("Intermittent Rain") && !phenomenon.equals("Drizzle")
+                        && !phenomenon.equals("Light Rain") && !phenomenon.equals("Showers")
+                        && !phenomenon.equals("Rain Showers") && !phenomenon.equals("Heavy Rain")
+                        && !phenomenon.equals("Thunderstorm"))) imgFog.setVisibility(View.VISIBLE);
+                else imgFog.setVisibility(View.INVISIBLE);
             } else {
                 imgIco.setVisibility(View.INVISIBLE);
             }
@@ -154,9 +161,6 @@ MainActivity extends AppCompatActivity {
             } else {
                 imgNext.setVisibility(View.INVISIBLE);
             }
-
-            if (fogVis < 4.0) imgFog.setVisibility(View.VISIBLE);
-                else imgFog.setVisibility(View.INVISIBLE);
 
             super.onPostExecute(result);
         }
@@ -288,8 +292,6 @@ MainActivity extends AppCompatActivity {
         Date date = Calendar.getInstance().getTime();
         long htime = date.getTime();
         String hsunset = sdf.format(htime).substring(11, 13);
-
-        Log.i(">>>>>>>>>>>>>>>>>>", value);
 
         switch (value) {
             case "Sunny":
