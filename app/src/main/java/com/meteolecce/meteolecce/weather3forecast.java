@@ -34,12 +34,13 @@ public class weather3forecast extends AppCompatActivity {
     int len = 0, temp1 = 0, temp2 = 0, temp3 = 0, tmpTemp = 0,
         tempd1max = -99, tempd1min = 99, tempd2max = -99, tempd2min = 99, tempd3max = -99, tempd3min = 99;
     int hum1 = 0, hum2 = 0, hum3 = 0;
-    int wind1 = 0, wind2 = 0, wind3 = 0;
+    int wind1 = 0, wind2 = 0, wind3 = 0, wind1p = 0, wind2p = 0, wind3p = 0;
     double dp1 = 0, dp2 = 0, dp3 = 0;
     String temp3d_1 = null, hum3d_1 = null, dateJson = null, hourJson = null,
             temp3d_2 = null, hum3d_2 = null,
             temp3d_3 = null, hum3d_3 = null,
             wind3d_3 = null, wind3d_2 = null, wind3d_1 = null,
+            wind1pt = null, wind2pt = null, wind3pt = null,
             fog = null,
             phenomenon11 = null, phenomenon12 = null, phenomenon13 = null, phenomenon14 = null,
             phenomenon21 = null, phenomenon22 = null, phenomenon23 = null, phenomenon24 = null,
@@ -124,6 +125,7 @@ public class weather3forecast extends AppCompatActivity {
                 temp1 = temp2 = temp3 = 0;
                 hum1 = hum2 = hum3 = 0;
                 wind1 = wind2 = wind3 = 0;
+                wind1p = wind2p = wind3p = 0;
                 dp1 = dp2 = dp3 = 0.0;
                 for (int i = 0; i < 130; i++) {
                     dateJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(0,10);
@@ -134,6 +136,7 @@ public class weather3forecast extends AppCompatActivity {
                         if ((tmpTemp < tempd1min) && (tmpTemp > (tempd1max-20))) tempd1min = tmpTemp;
                         hum1 = hum1 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
                         wind1 = windDir(Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i -1).getString("windspeed")), wind1, Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed")), Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")));
+                        wind1p = wind1p + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed"));
                         //Log.i(Integer.toString(wind1), ">>>>>>>>>> WIND DIR: ");
                         dp1 = dp1 + Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("dewpoint"));
                         if (hourJson.equals("00")) phenomenon11 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
@@ -148,6 +151,7 @@ public class weather3forecast extends AppCompatActivity {
                         hum2 = hum2 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
                         //wind2 = (wind2 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")))/2;
                         wind2 = windDir(Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i - 1).getString("windspeed")), wind2, Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed")), Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")));
+                        wind2p = wind2p + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed"));
                         dp2 = dp2 + Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("dewpoint"));
                         if (hourJson.equals("00")) phenomenon21 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
                         if (hourJson.equals("06")) phenomenon22 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
@@ -162,6 +166,7 @@ public class weather3forecast extends AppCompatActivity {
                         hum3 = hum3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("humidity"));
                         //wind3 = (wind3 + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")))/2;
                         wind3 = windDir(Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i - 1).getString("windspeed")), wind3, Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed")), Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")));
+                        wind3p = wind3p + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed"));
                         //Log.i("" + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("windspeed")) + " " + Integer.parseInt(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("winddirection")), "AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                         dp3 = dp3 + Double.parseDouble(json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("dewpoint"));
                         if (hourJson.equals("00")) phenomenon31 = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("iconName");
@@ -178,6 +183,9 @@ public class weather3forecast extends AppCompatActivity {
                 wind3d_1 = "" + wind1; //24;
                 wind3d_2 = "" + wind2; //24;
                 wind3d_3 = "" + wind3; //24;
+                wind1pt = " / " + wind1p/24 + " Km/h";
+                wind2pt = " / " + wind2p/24 + " Km/h";
+                wind3pt = " / " + wind3p/24 + " Km/h";
                 dp1 = dp1/24;
                 dp2 = dp2/24;
                 dp3 = dp3/24;
@@ -197,7 +205,7 @@ public class weather3forecast extends AppCompatActivity {
             String today31 = sdf3.format(ltime1);
             day1.setText(dayInITA(today31.substring(0,3)).concat(" ").concat(today31.substring(4,14)));
             txtTemp3d_1.setText(Integer.toString(tempd1min).concat("/").concat(Integer.toString(tempd1max)).concat(" °C"));
-            txtWind3d_1.setText(windDirection((int) Double.parseDouble(wind3d_1)));
+            txtWind3d_1.setText(windDirection((int) Double.parseDouble(wind3d_1)) + wind1pt);
             if (hum3d_1 != null) txtHum3d_1.setText(hum3d_1.concat(" %"));
             if ((((tempd1max + tempd1min)/2) - dp1) < 4.0) imgFog1.setVisibility(View.VISIBLE);
                 else imgFog1.setVisibility(View.INVISIBLE);
@@ -229,7 +237,7 @@ public class weather3forecast extends AppCompatActivity {
             String today32 = sdf3.format(ltime2);
             day2.setText(dayInITA(today32.substring(0,3)).concat(" ").concat(today32.substring(4,14)));
             txtTemp3d_2.setText(Integer.toString(tempd2min).concat("/").concat(Integer.toString(tempd2max)).concat(" °C"));
-            txtWind3d_2.setText(windDirection((int) Double.parseDouble(wind3d_2)));
+            txtWind3d_2.setText(windDirection((int) Double.parseDouble(wind3d_2)) + wind2pt);
             if (hum3d_2 != null) txtHum3d_2.setText(hum3d_2.concat(" %"));
             if ((((tempd2max + tempd2min)/2) - dp2) < 4.0) imgFog2.setVisibility(View.VISIBLE);
             else imgFog2.setVisibility(View.INVISIBLE);
@@ -261,7 +269,7 @@ public class weather3forecast extends AppCompatActivity {
             String today33 = sdf3.format(ltime3);
             day3.setText(dayInITA(today33.substring(0,3)).concat(" ").concat(today33.substring(4,14)));
             txtTemp3d_3.setText(Integer.toString(tempd3min).concat("/").concat(Integer.toString(tempd3max)).concat(" °C"));
-            txtWind3d_3.setText(windDirection((int) Double.parseDouble(wind3d_3)));
+            txtWind3d_3.setText(windDirection((int) Double.parseDouble(wind3d_3)) + wind3pt);
             if ((((tempd3max + tempd3min)/2) - dp3) < 4.0) imgFog3.setVisibility(View.VISIBLE);
                 else imgFog3.setVisibility(View.INVISIBLE);
             if (hum3d_3 != null) txtHum3d_3.setText(hum3d_3.concat(" %"));
@@ -368,21 +376,21 @@ public class weather3forecast extends AppCompatActivity {
         String dir = null;
 
         if (deg > 335 || deg <= 25) {
-            dir = "Nord";
+            dir = "N";
         } else if (deg > 25 && deg <= 65) {
-            dir = "Nord-Est";
+            dir = "NE";
         } else if (deg > 65 && deg <= 155) {
-            dir = "Est";
+            dir = "E";
         } else if (deg > 115 && deg <= 155) {
-            dir = "Sud-Est";
+            dir = "SE";
         } else if (deg > 155 && deg <= 205) {
-            dir = "Sud";
+            dir = "S";
         } else if (deg > 205 && deg <= 245) {
-            dir = "Sud-Ovest";
+            dir = "SO";
         } else if (deg > 245 && deg <= 295) {
-            dir = "Ovest";
+            dir = "O";
         } else if (deg > 295 && deg <= 335) {
-            dir = "Nord-Ovest";
+            dir = "NO";
         }
 
         return dir;

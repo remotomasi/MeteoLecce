@@ -66,8 +66,8 @@ MainActivity extends AppCompatActivity {
             txtDate = (TextView) findViewById(R.id.textView20);
             txtTemp = (TextView) findViewById(R.id.textView7);
             txtHum = (TextView) findViewById(R.id.textView4);
-            txtWPow = (TextView) findViewById(R.id.textView8);
-            txtWDir = (TextView) findViewById(R.id.textView10);
+            txtWPow = (TextView) findViewById(R.id.textView10);
+            txtWDir = (TextView) findViewById(R.id.textView8);
             txtClouds = (TextView) findViewById(R.id.textView13);
             txtPhenomen = (TextView) findViewById(R.id.textView14);
             imgIco = (ImageView) findViewById(R.id.imageViewIcon);
