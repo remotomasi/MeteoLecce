@@ -183,9 +183,9 @@ public class weather3forecast extends AppCompatActivity {
                 wind3d_1 = "" + wind1; //24;
                 wind3d_2 = "" + wind2; //24;
                 wind3d_3 = "" + wind3; //24;
-                wind1pt = " / " + wind1p/24 + " Km/h";
-                wind2pt = " / " + wind2p/24 + " Km/h";
-                wind3pt = " / " + wind3p/24 + " Km/h";
+                wind1pt = " / " + (int)(wind1p*1.852/24) + " Km/h";
+                wind2pt = " / " + (int)(wind2p*1.852/24) + " Km/h";
+                wind3pt = " / " + (int)(wind3p*1.852/24) + " Km/h";
                 dp1 = dp1/24;
                 dp2 = dp2/24;
                 dp3 = dp3/24;
@@ -411,14 +411,14 @@ public class weather3forecast extends AppCompatActivity {
         finalDir = (int) Math.toDegrees(Math.atan((mod1 * Math.sin(x) + mod2 * Math.sin(y))/(mod1 * Math.cos(x) + mod2 * Math.cos(y))));
 
         // Based on the value of the arctangent
-        if (Math.cos(x) > 0 && Math.sin(x) < 0 && Math.cos(y) > 0 && Math.sin(y) < 0) finalDir += 360;
-        if (Math.cos(x) > 0 && Math.sin(x) < 0 && Math.cos(y) < 0 && Math.sin(y) < 0) finalDir += 180;
-        if (Math.cos(x) < 0 && Math.sin(x) < 0 && Math.cos(y) < 0 && Math.sin(y) < 0) finalDir += 180;
-        if (Math.cos(x) < 0 && Math.sin(x) < 0 && Math.cos(y) < 0 && Math.sin(y) > 0) finalDir += 180;
-        if (Math.cos(x) < 0 && Math.sin(x) > 0 && Math.cos(y) < 0 && Math.sin(y) > 0) finalDir += 180;
-        if (Math.cos(x) < 0 && Math.sin(x) > 0 && Math.cos(y) < 0 && Math.sin(y) < 0) finalDir += 180;
+        //if (Math.cos(x) > 0 && Math.sin(x) > 0 && Math.cos(y) > 0 && Math.sin(y) > 0) finalDir += 360;
+        //if (Math.cos(x) < 0 && Math.sin(x) > 0 && Math.cos(y) < 0 && Math.sin(y) > 0) finalDir += 180;
+        //if (Math.cos(x) < 0 && Math.sin(x) < 0 && Math.cos(y) < 0 && Math.sin(y) < 0) finalDir += 180;
+        //if (Math.cos(x) > 0 && Math.sin(x) < 0 && Math.cos(y) < 0 && Math.sin(y) > 0) finalDir += 180;
+        //if (Math.cos(x) < 0 && Math.sin(x) > 0 && Math.cos(y) < 0 && Math.sin(y) > 0) finalDir += 180;
+        //if (Math.cos(x) < 0 && Math.sin(x) > 0 && Math.cos(y) < 0 && Math.sin(y) < 0) finalDir += 180;
 
-        if (finalDir < 0) finalDir += 180;
+        if (finalDir < 0) finalDir += 360;
 
         return finalDir;
     }
