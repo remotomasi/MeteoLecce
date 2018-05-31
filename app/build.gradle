@@ -14,8 +14,8 @@ android {
         applicationId "com.meteolecce.meteolecce"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 12
-        versionName 'ImpWind Release'
+        versionCode 13
+        versionName 'DPW Release'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
