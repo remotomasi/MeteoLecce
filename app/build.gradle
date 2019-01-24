@@ -14,8 +14,8 @@ android {
         applicationId "com.meteolecce.meteolecce"
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 16
-        versionName '1.1.16'
+        versionCode 17
+        versionName '1.1.17'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

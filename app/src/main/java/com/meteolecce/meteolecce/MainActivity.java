@@ -88,13 +88,15 @@ MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            str = str.replace("}{", "}, {");
             str = str.replace("} {", "}, {");
+            Log.i(">>> JSON: ", str);
 
             try {
                 dateJson = null;
                 JSONObject json = new JSONObject(str);
 
-                for (int i = 0; i < 130; i++) {
+                for (int i = 0; i < 125; i++) {
                     dateJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(0, 10);
                     hourJson = json.getJSONObject("metcheckData").getJSONObject("forecastLocation").getJSONArray("forecast").getJSONObject(i).getString("utcTime").substring(11, 13);
                     if (todaym.substring(0, 10).equals(dateJson) && (today1.substring(11,13).equals(hourJson))) {
