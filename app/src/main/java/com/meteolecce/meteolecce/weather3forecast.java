@@ -404,16 +404,25 @@ public class weather3forecast extends AppCompatActivity {
      */
     public int windDir(double mod1, int angle1, double mod2, int angle2) {
 
-        double x = 0, y = 0;
+        double x = 0, y = 0, u = 0, v = 0, u1 = 0, v1 = 0, u2 = 0, v2 = 0;
         int finalDir = 0;
 
         // convert them to radians
         x = Math.toRadians(angle1);
         y = Math.toRadians(angle2);
 
-        finalDir = (int) Math.toDegrees(Math.atan((mod1 * Math.sin(x) + mod2 * Math.sin(y))/(mod1 * Math.cos(x) + mod2 * Math.cos(y))));
+        u1 = mod1 * Math.cos(x);
+        v1 = mod1 * Math.sin(x);
+        u2 = mod2 * Math.cos(y);
+        v2 = mod2 * Math.sin(y);
 
-        finalDir = (finalDir + 360) % 360;
+        u = u1 + u2;
+        v = v1 + v2;
+
+        finalDir = (int) Math.toDegrees(Math.atan(v/u)) + 180;
+
+        //finalDir = (int) Math.toDegrees(Math.atan((mod1 * Math.sin(x) + mod2 * Math.sin(y))/(mod1 * Math.cos(x) + mod2 * Math.cos(y))));
+        //finalDir = (finalDir + 360) % 360;
 
         return finalDir;
     }
